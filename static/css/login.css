@@ -35,7 +35,7 @@ form {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px black;
   width: 100%;
   max-width: 400px;
   margin-bottom: 50px;
@@ -87,7 +87,5 @@ form {
     display: block;
   }
 
-  form {
-    width: 80%;
-  }
+
 }

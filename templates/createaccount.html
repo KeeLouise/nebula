@@ -22,7 +22,12 @@
   </div>
   </header>
   <main>
+    <h1>Create Your Account</h1>
     <form>
+      <div class="form-group">
+        <label for="fullname" class="form-label">Full Name</label>
+        <i class="bi bi-person"></i><input type="text" class="form-control" id="fullname" placeholder="Your full name" required>
+    </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <i class="bi bi-envelope"></i> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -32,11 +37,15 @@
         <label for="exampleInputPassword1">Password</label>
         <i class="bi bi-lock"></i><input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <i class="bi bi-lock"></i><input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+      </div>
       <button type="submit" class="btn btn-primary">Create My Account</button>
     </form>
-    <button type="button" onclick="location.href='#'" class="btn btn-primary">
-      Return To Login page
-  </button>
+    <button type="button" onclick="location.href='/static/templates/index.html'" class="btn btn-primary">
+        Return to Login page
+    </button>
 </main>
 <footer>
 NEBULA &copy; Kiera Reidy 2025<br>
