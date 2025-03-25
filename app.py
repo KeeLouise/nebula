@@ -9,6 +9,3 @@ def login():
 @app.route('/createaccount')
 def createaccount():
     return render_template('createaccount.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
