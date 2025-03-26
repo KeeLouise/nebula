@@ -9,9 +9,9 @@ document.getElementById("createAccount").addEventListener("submit", function(eve
 
     // This will retrieve form values - KR 26/03/2025
     var fullName = document.getElementById("fullname").value;
-    var email = document.getElementById("exampleInputEmail1").value;
-    var password = document.getElementById("exampleInputPassword1").value;
-    var confirmPassword = document.getElementById("exampleInputPassword2").value;
+    var email = document.getElementById("inputEmail1").value;
+    var password = document.getElementById("inputPassword1").value;
+    var confirmPassword = document.getElementById("inputPassword2").value;
 
     var valid = true;
 
@@ -27,3 +27,24 @@ document.getElementById("createAccount").addEventListener("submit", function(eve
         emailError.textContent = "Please enter a valid email address.";
         emailError.style.color = "red";
     }
+
+    // Password validation - KR 26/03/2025
+    if (password.length < 8){
+        passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordError.style.color = "red";
+        valid = false;
+    }
+
+    // This is further validation for confirm password - KR 26/03/2025
+    if(password !== confirmPassword){
+        confirmPasswordError.textContent = "Passwords do not match. Please re-enter your password.";
+        confirmPasswordError.style.color = "red";
+        valid = false;
+    }
+
+    // If any of the above validation fails, prevent form submission - KR 26/03/2025
+    if (!valid) {
+        event.preventDefault();
+    }
+});
+
