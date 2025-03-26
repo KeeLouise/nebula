@@ -15,3 +15,15 @@ document.getElementById("createAccount").addEventListener("submit", function(eve
 
     var valid = true;
 
+    // The below is to validate the Full Name field - KR 26/03/2025
+    if (fullName.trim() === "") {
+        alert("Please provide your full name.");
+        valid = false;
+    }
+
+    //Email validation - copied from login.js - KR 26/03/2025
+    if (!emailRegex.test(email)) {
+        event.preventDefault();  // Prevent form submission - KR 26/03/2025
+        emailError.textContent = "Please enter a valid email address.";
+        emailError.style.color = "red";
+    }
