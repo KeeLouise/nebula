@@ -1,19 +1,18 @@
-body, html {
+body {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
+  background-color: #f8f9fa;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
 
 #container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  padding-top: 50px;
+  padding-top: 200px;
+  box-sizing: border-box;
 }
 
 .main-header {
@@ -34,41 +33,53 @@ body, html {
   display: none;
 }
 
-
-form {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px black;
+.login-box {
   width: 100%;
-  width: 400px;
-  margin-top: 200px;
-  margin-bottom: 50px;
+  max-width: 400px;
+  padding: 20px;
+  margin-top: 150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+form h2 {
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 .form-group {
   margin-bottom: 15px;
-  text-align: center;
 }
 
-.btn-primary {
-  margin: 20px auto;
-  display: block;
+.btn-primary,
+.btn-secondary {
   width: 100%;
+  margin-top: 10px;
 }
 
-@media (max-width: 600px) {
-  body, html {
-    height: auto;
-    padding: 20px;
+@media (max-width: 460px) {
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobiletablet-logo {
+    display: block;
   }
 
   #container {
-    width: 90%;
-    text-align: center;
+    padding: 140px 20px 0;
   }
 
+  .login-box {
+    width: 100%;
+    margin-top: 120px;
+
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1179px) {
   .desktop-logo {
     display: none;
   }
@@ -77,22 +88,10 @@ form {
     display: block;
   }
 
-  form {
+  .login-box {
     width: 100%;
+    margin-top: 100px;
+
   }
 
-  .btn-primary {
-    width: 100%;
-  }
 }
-
-@media (min-width: 600px) and (max-width: 1024px) {
-  .desktop-logo {
-    display: none;
-  }
-
-  .mobiletablet-logo {
-    display: block;
-  }
-}
-
