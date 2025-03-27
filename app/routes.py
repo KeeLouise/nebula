@@ -21,6 +21,10 @@ def login():
 
     return render_template('login.html')
 
+@routes.route('/')
+def home():
+    return redirect(url_for('routes.login')) # Added as render.com cannot see /login as the home page - KR 27/03/2025
+
 @routes.route('/register')
 def register():
     return "Registration page coming soon!" #placeholder for the registration page until it is set up- KR 27/03/2025
