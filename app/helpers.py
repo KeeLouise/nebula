@@ -37,3 +37,34 @@ def save_user(new_user):
     users = load_users()
     users.append(new_user)
     save_users(users)    #Updated code to append a new user to users.json - KR 28/03/2025
+
+def get_posts_file():
+    """Returns the correct path to the posts.json file"""
+    data_dir = os.path.join(os.path.dirname(__file__), 'data')
+    posts_file = os.path.join(data_dir, 'posts.json')
+
+    # Ensure the data directory exists - kr 28/03/2025
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+
+    # Ensure posts.json exists - KR 28/03/2025
+    if not os.path.exists(posts_file):
+        with open(posts_file, 'w') as f:
+            json.dump([], f)
+
+    return posts_file
+
+def load_posts():
+    """Load posts from posts.json file"""
+    posts_file = get_posts_file()
+    try:
+        with open(posts_file, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_posts(posts):
+    """Save posts to posts.json file"""
+    posts_file = get_posts_file()
+    with open(posts_file, 'w') as f:
+        json.dump(posts, f, indent=2)
