@@ -85,7 +85,7 @@ def register_routes(app):
         content = request.form.get('content')
         if not content:
             flash("Post content cannot be empty.")  # Validate empty post - KR 28/03/2025
-            return redirect(url_for('blogpage'))
+            return redirect(url_for('blog'))
 
         email = session['user']
         users = load_users()
