@@ -68,3 +68,8 @@ def save_posts(posts):
     posts_file = get_posts_file()
     with open(posts_file, 'w') as f:
         json.dump(posts, f, indent=2)
+
+def save_post(new_post):
+    posts = load_posts()
+    posts.insert(0, new_post)  # inserts new post at the beginning of the list - KR 28/03/2025
+    save_posts(posts)
