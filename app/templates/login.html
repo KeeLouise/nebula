@@ -29,7 +29,7 @@
   {% endif %}
 {% endwith %}
       <div class="login-box">
-        <form method="POST" action="{{ url_for('routes.login') }}">
+        <form method="POST" action="{{ url_for('login') }}">
           <h2>Login</h2>
           <div class="form-group">
             <label for="email" class="form-label">Email address</label>
@@ -41,7 +41,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <a href="{{ url_for('routes.register') }}" class="btn btn-secondary">Create an Account</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary">Create an Account</a>
       </div>
     </main>
     <footer class="text-center mt-5">
