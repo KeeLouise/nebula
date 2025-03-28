@@ -1,14 +1,12 @@
-import json
 from flask import Flask
-from .routes import routes
+from .routes import register_routes  # import the route registration function
 
 def create_app():
     app = Flask(__name__)
 
-    # Secret key for sessions
+    # Secret key for sessions and flash messages - KR 28/03/2025
     app.config['SECRET_KEY'] = 'NEBULA_2025'
 
-    # Register Blueprint
-    app.register_blueprint(routes)
+    register_routes(app)
 
     return app
