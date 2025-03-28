@@ -18,7 +18,7 @@ def register_routes(app):
             for user in users:
                 if user['email'] == email and check_password_hash(user['password'], password):
                     session['user'] = email
-                    session['name'] = user['name']  # Store name for use in blog posts - KR 28/03/2025
+                    session['name'] = user.get('full_name', 'User')  # retrieves user's full name for the session - KR 28/03/2025
                     return redirect(url_for('blogpage'))  # Redirect to blog after successful login - KR 28/03/2025
 
             flash("Invalid credentials. Please try again.")  # Invalid login attempt - KR 28/03/2025
@@ -56,7 +56,7 @@ def register_routes(app):
             hashed_password = generate_password_hash(password)
 
             new_user = {
-                'name': full_name,
+                'full_name': full_name,
                 'email': email,
                 'password': hashed_password
             }
@@ -79,18 +79,18 @@ def register_routes(app):
     @app.route('/post', methods=['POST'])
     def create_post():
         if 'user' not in session:
-            flash("You must be logged in to post.")  # Secure post creation - KR 28/03/2025
+            flash("You must be logged in to post.")
             return redirect(url_for('login'))
 
         content = request.form.get('content')
         if not content:
             flash("Post content cannot be empty.")  # Validate empty post - KR 28/03/2025
-            return redirect(url_for('blog'))
+            return redirect(url_for('blogpage'))
 
         email = session['user']
         users = load_users()
         user = next((u for u in users if u['email'] == email), None)
-        author_name = user['name'] if user else "Anonymous"
+        author_name = user.get('full_name', 'Anonymous') if user else "Anonymous"
 
         new_post = {
             'author': author_name,
@@ -105,9 +105,8 @@ def register_routes(app):
 
     @app.route('/resources')
     def resources():
-        return render_template("resources.html") 
+        return render_template("resources.html")
 
     @app.route('/merchandise')
     def merchandise():
-        return render_template("merchandise.html") 
-
+        return render_template("merchandise.html")
