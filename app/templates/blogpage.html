@@ -37,11 +37,22 @@
         </header>
         <div class="grid-container">
             <main class="main-content">
+                {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-info mt-3">
+      {% for message in messages %}
+        <div>{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
                 <h1>What's on your mind?</h1>
                 <div class="card p-3 mb-3">
                     <h5>Create a New Post</h5>
-                    <textarea id="postContent" class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
-                    <button class="btn btn-primary mt-2">Post</button>
+                    <form method="POST" action="{{ url_for('create_post') }}">
+                        <textarea name="content" class="form-control" rows="3" placeholder="Type your post here..." required></textarea>
+                        <button type="submit" class="btn btn-primary mt-2">Post</button>
+                    </form>
                 </div>
                 <div id="postsContainer"></div>
             </main>
