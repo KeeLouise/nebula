@@ -31,3 +31,9 @@ def save_users(users):
     users_file = get_users_file()
     with open(users_file, 'w') as f:
         json.dump(users, f, indent=2)
+
+def save_user(new_user):
+    """Append a new user to users.json"""
+    users = load_users()
+    users.append(new_user)
+    save_users(users)    #Updated code to append a new user to users.json - KR 28/03/2025
