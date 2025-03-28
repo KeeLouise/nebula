@@ -54,7 +54,29 @@
                         <button type="submit" class="btn btn-primary mt-2">Post</button>
                     </form>
                 </div>
-                <div id="postsContainer"></div>
+                <h5 class="mt-4">Recent Posts</h5>
+
+{% if posts %}
+  {% for post in posts %}
+    <div class="card p-3 mb-3">
+        <p class="mb-1"><strong>{{ post.author }}</strong></p>
+        <p>{{ post.content }}</p>
+        <p class="text-muted small mb-0">❤️ {{ post.likes }} likes</p>
+        {% if post.comments %}
+            <div class="mt-2">
+                <strong>Comments:</strong>
+                <ul class="ps-3">
+                    {% for comment in post.comments %}
+                        <li>{{ comment }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="text-muted">No posts yet. Be the first to share something!</p>
+{% endif %}
             </main>
             <aside class="sidebar">
                 <div class="card p-3">
