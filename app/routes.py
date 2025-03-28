@@ -17,7 +17,7 @@ def register_routes(app):
             for user in users:
                 if user['email'] == email and check_password_hash(user['password'], password):
                     session['user'] = email
-                    return redirect(url_for('blogpage'))
+                    return redirect(url_for('blog'))
 
             flash("Invalid credentials. Please try again.")
             return redirect(url_for('login'))
