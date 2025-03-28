@@ -22,6 +22,15 @@
     </div>
   </header>
   <main>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-warning" role="alert">
+      {% for message in messages %}
+        <div>{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
     <h1>Create Your Account</h1>
     <form id="createAccount" method="POST">
       <div class="form-group">

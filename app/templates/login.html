@@ -19,6 +19,15 @@
         <img src="{{ url_for('static', filename='images/mobiletablet-logo.png') }}" width="375" height="188" alt="Company Logo" class="mobiletablet-logo">
     </header>
     <main>
+      {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-warning" role="alert">
+      {% for message in messages %}
+        <div>{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
       <div class="login-box">
         <form method="POST" action="{{ url_for('routes.login') }}">
           <h2>Login</h2>
