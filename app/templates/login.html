@@ -15,10 +15,8 @@
 <body>
   <div id="container">
     <header class="main-header">
-      <div class="logo-container">
         <img src="{{ url_for('static', filename='images/desktop-logo.png') }}" width="500" height="250" alt="Company Logo" class="desktop-logo">
         <img src="{{ url_for('static', filename='images/mobiletablet-logo.png') }}" width="375" height="188" alt="Company Logo" class="mobiletablet-logo">
-      </div>
     </header>
     <main>
       <div class="login-box">
@@ -37,7 +35,6 @@
         <a href="{{ url_for('routes.register') }}" class="btn btn-secondary">Create an Account</a>
       </div>
     </main>
-
     <footer class="text-center mt-5">
       NEBULA &copy; Kiera Reidy 2025<br>
     </footer>
