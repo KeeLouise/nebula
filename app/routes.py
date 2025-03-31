@@ -110,3 +110,8 @@ def register_routes(app):
     @app.route('/merchandise')
     def merchandise():
         return render_template("merchandise.html")
+    
+    @app.route('/logout', methods=['POST']) #Logout Test - KR 31/03/2025
+    def logout():
+        session.pop('user', None)
+        return redirect(url_for('login'))
