@@ -25,7 +25,9 @@
                     <li><a href="{{ url_for('blogpage') }}">Home</a></li>
                     <li><a href="{{ url_for('resources') }}">Resources</a></li>
                     <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-                </ul>
+                    <li><form id="logoutForm" action="/logout" method="POST">
+                        <button id="logout" type="submit">Logout</button></form></li>
+                    </ul>
                 </div>
             <nav>
                 <ul>
