@@ -116,6 +116,24 @@ nav ul li a {
 nav ul li a:hover {
     color: purple;
 }
+
+#logout-form{
+    display: inline;
+}
+.logout-button {
+    color: white;
+    text-decoration: none;
+    background: black;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .logout-button:hover, nav ul li a:hover {
+    background-color: #555;
+    border-radius: 4px;
+  }
 #mobile-nav{
     display: none;
 }
