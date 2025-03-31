@@ -22,18 +22,16 @@
                 </div>
                 <div id="mobile-nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Resources</a></li>
-                    <li><a href="#">Merchandise</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
                 </ul>
                 </div>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Resources</a></li>
-                    <li><a href="#">Merchandise</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
                 </ul>
             </nav>
         </header>
@@ -45,9 +43,9 @@
         <div id="resource-list">
             <ul>
                 <li><a href="https://www.w3schools.com">W3 Schools</a></li>
-                <li><a href="https://www.w3schools.com">freeCodeCamp</a></li>
-                <li><a href="https://www.w3schools.com">UDemy</a></li>
-                <li><a href="https://www.w3schools.com">Code Academy</a></li>
+                <li><a href="https://www.freecodecamp.com">freeCodeCamp</a></li>
+                <li><a href="https://www.udemy.com">UDemy</a></li>
+                <li><a href="https://www.codeacademy.com">Code Academy</a></li>
             </ul>
         </div>
     </main>
@@ -56,6 +54,6 @@
     <footer class="text-center mt-4">
         NEBULA &copy; Kiera Reidy 2025
     </footer>
-<script src="/static/javascript/blogpage.js"></script>
+<script src="{{ url_for('static', filename='javascript/resources.js') }}"></script>
 </body>
 </html>
