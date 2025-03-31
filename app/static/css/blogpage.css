@@ -126,14 +126,9 @@ nav ul li a:hover {
     background: none;
     border: none;
     color: #333;
-    font-size: 20px;
-    padding: 8px;
+    font-weight: bold;
+    font-size: 18px;
     cursor: pointer;
-}
-
-.logout-button:hover {
-    color: purple;
-    border-radius: 4px;
 }
 
 .grid-container {
