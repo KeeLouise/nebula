@@ -84,15 +84,15 @@
         <button type="submit" class="btn btn-sm btn-primary">Post Comment</button>
     </form>
     {% if post.comments %}
-    <div class="mt-3">
-        <strong>Comments:</strong>
-        <ul class="ps-3">
-            {% for comment in post.comments %}
-                <li>{{ comment }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+  <div class="mt-3">
+    <strong>Comments:</strong>
+    <ul class="ps-3">
+      {% for comment in post.comments %}
+        <li><strong>{{ comment.author }}</strong>: {{ comment.text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
 </div>
 {% endfor %}
 {% else %}

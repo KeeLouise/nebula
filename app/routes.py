@@ -1,8 +1,12 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .helpers import (load_users, save_user, get_user, load_posts, save_post, find_post_by_id, update_post, delete_post)
+from .helpers import (
+    load_users, save_user, get_user, load_posts,
+    save_post, save_posts, find_post_by_id, update_post, delete_post
+)
+import uuid  # for generating unique post IDs - KR 02/04/2025
 
-import uuid #for generating unique post IDs - KR 02/04/2025
+
 def register_routes(app):
     @app.route('/')
     def home():
@@ -19,22 +23,22 @@ def register_routes(app):
                 session['user'] = email
                 session['name'] = user.get('full_name', 'User')
                 return redirect(url_for('blogpage'))
-            
+
             flash("Invalid email or password. Please try again or register.")
             return redirect(url_for('login'))
-        
+
         return render_template('login.html')
 
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         if request.method == 'POST':
-            full_name = request.form.get('fullname')
+            full_name = request.form.get('full_name')
             email = request.form.get('email')
             password = request.form.get('password')
             confirm_password = request.form.get('confirm_password')
 
             # Validation checks - KR 28/03/2025
-            if not full_name or not email or not password or not confirm_password:
+            if not all([full_name, email, password, confirm_password]):
                 flash("All fields are required.")
                 return redirect(url_for('register'))
 
@@ -48,7 +52,7 @@ def register_routes(app):
 
             if get_user(email):
                 flash("Email already registered.")
-                return redirect(url_for('register'))  # Redirects to login  page if email is already in use - KR 02/04/2025
+                return redirect(url_for('register'))  # Redirects to login page if email is already in use - KR 02/04/2025
 
             # Hash and save user via helpers.py - KR 28/03/2025
             hashed_password = generate_password_hash(password)
@@ -90,7 +94,7 @@ def register_routes(app):
         author_name = user.get('full_name')
 
         new_post = {
-            'id': str(uuid.uuid4()), #generates a unique ID for each post - KR 02/04/2025
+            'id': str(uuid.uuid4()),  # generates a unique ID for each post - KR 02/04/2025
             'author': author_name,
             'content': content,
             'likes': 0,
@@ -100,28 +104,35 @@ def register_routes(app):
         save_post(new_post)  # Save to POSTS_DB - KR 02/04/2025
         flash("Your post was published successfully.")
         return redirect(url_for('blogpage'))
-    
+
     @app.route('/comment/<post_id>', methods=['POST'])
     def add_comment(post_id):
         if 'user' not in session:
-            flash ("You must be logged in to comment.")
+            flash("You must be logged in to comment.")
             return redirect(url_for('login'))
-        
-        comment = request.form.get('comment')
-        if comment:
-            post = find_post_by_id(post_id)
-            if post:
-                post['comments'].append(comment)
-                update_post(post_id, post)  # Update the post in POSTS_DB - KR 02/04/2025
-                flash("Comment added!")
-            else:
-                flash("Post not found.")
-        else:
+
+        comment_text = request.form.get('comment')  # Now it's inside the function
+
+        if not comment_text:
             flash("Comment cannot be empty.")
+            return redirect(url_for('blogpage'))
+
+        posts = load_posts()
+        for post in posts:
+            if post['id'] == post_id:
+                comment = {
+                    "author": session.get('name', 'Anonymous'),
+                    "text": comment_text
+                }
+                post['comments'].append(comment)
+                break
+
+        save_posts(posts)  # Save updated post list - KR 02/04/2025
+        flash("Comment added!")
         return redirect(url_for('blogpage'))
-    
-    @app.route('/delet_post/<post_id>', methods=['POST'])
-    def delete_post_route(post_id):
+
+    @app.route('/delete_post/<post_id>', methods=['POST'])
+    def delete_post(post_id):
         if 'user' not in session:
             flash("You must be logged in to delete posts.")
             return redirect(url_for('login'))
@@ -144,8 +155,8 @@ def register_routes(app):
     @app.route('/merchandise')
     def merchandise():
         return render_template("merchandise.html")
-    
-    @app.route('/logout', methods=['POST']) #Logout Test - KR 31/03/2025
+
+    @app.route('/logout', methods=['POST'])  # Logout Test - KR 31/03/2025
     def logout():
         session.pop('user', None)
         return redirect(url_for('login'))

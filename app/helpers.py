@@ -1,6 +1,5 @@
-import shelve
-import uuid
-import os
+import shelve, uuid, os
+from datetime import datetime, timezone
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data') #typo in previous version. Fixed. KR 02/04/2025
 
@@ -39,7 +38,16 @@ def save_post(new_post):
     with shelve.open(POSTS_DB, writeback=True) as db:
         if 'id' not in new_post:
             new_post['id'] = str(uuid.uuid4())
+        if 'created_at' not in new_post:
+            new_post['created_at'] = datetime.now(timezone.utc).isoformat()
         db[new_post['id']] = new_post
+
+def save_posts(posts):
+    """Overwrite all posts"""
+    with shelve.open(POSTS_DB, writeback=True) as db:
+        db.clear()
+        for post in posts:
+            db[post['id']] = post
 
 def find_post_by_id(post_id):
     """Find a post by its ID"""
