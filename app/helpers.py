@@ -17,6 +17,11 @@ def load_users():
     with shelve.open(USERS_DB) as db:
         return list(db.values())
 
+def get_user(email):
+    """Load a user by their email"""
+    with shelve.open(USERS_DB) as db:
+        return db.get(email)
+    
 def save_user(user):
     """save a user by their email as a key"""
     with shelve.open(USERS_DB, writeback=True) as db:
