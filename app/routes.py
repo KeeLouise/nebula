@@ -102,7 +102,16 @@ def register_routes(app):
         save_post(new_post)  # Save to posts.json using helper - KR 28/03/2025
         flash("Your post was published successfully.")
         return redirect(url_for('blogpage'))
-
+    
+    @app.route('/comment/<int:post_id>', methods=['POST']) #added code for comment functionality - KR 02/04/2025
+    def add_comment(post_id):
+        comment = request.form.get('comment')
+        if comment:
+            post = find_post_by_id(post_id)
+            post['comments'].append(comment)
+            flash('Comment added!')
+            return redirect(url_for('blogpage'))
+    
     @app.route('/resources')
     def resources():
         return render_template("resources.html")
