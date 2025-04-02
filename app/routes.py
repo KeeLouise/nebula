@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .helpers import load_users, save_users, save_user  # Added save_user for clean user saving - KR 28/03/2025
-from .helpers import load_posts, save_post  # Added post handling - KR 28/03/2025
+from .helpers import (load_users, save_user, get_user, load_posts, save_post, find_post_by_id, update_post, delete_post)
 
+import uuid #for generating unique post IDs - KR 02/04/2025
 def register_routes(app):
     @app.route('/')
     def home():
@@ -14,16 +14,15 @@ def register_routes(app):
             email = request.form.get('email')
             password = request.form.get('password')
 
-            users = load_users()  # Load user data from users.json - KR 28/03/2025
-            for user in users:
-                if user['email'] == email and check_password_hash(user['password'], password):
-                    session['user'] = email
-                    session['name'] = user.get('full_name', 'User')  # retrieves user's full name for the session - KR 28/03/2025
-                    return redirect(url_for('blogpage'))  # Redirect to blog after successful login - KR 28/03/2025
-
-            flash("Invalid credentials. Please try again.")  # Invalid login attempt - KR 28/03/2025
+            user = get_user(email)
+            if user and check_password_hash(user['password'], password):
+                session['user'] = email
+                session['name'] = user.get('full_name', 'User')
+                return redirect(url_for('blogpage'))
+            
+            flash("Invalid email or password. Please try again or register.")
             return redirect(url_for('login'))
-
+        
         return render_template('login.html')
 
     @app.route('/register', methods=['GET', 'POST'])
@@ -47,10 +46,9 @@ def register_routes(app):
                 flash("Password must be at least 8 characters.")
                 return redirect(url_for('register'))
 
-            users = load_users()
-            if any(user['email'] == email for user in users):
+            if get_user(email):
                 flash("Email already registered.")
-                return redirect(url_for('register'))
+                return redirect(url_for('register'))  # Redirects to login  page if email is already in use - KR 02/04/2025
 
             # Hash and save user via helpers.py - KR 28/03/2025
             hashed_password = generate_password_hash(password)
@@ -70,10 +68,10 @@ def register_routes(app):
     @app.route('/blog', methods=['GET'])
     def blogpage():
         if 'user' not in session:
-            flash("You must be logged in to view the blog.")  # Prevent unauthenticated access - KR 28/03/2025
+            flash("You must be logged in to view this page.")  # Prevent unauthenticated access - KR 28/03/2025
             return redirect(url_for('login'))
 
-        posts = load_posts()  # Load posts from posts.json - KR 28/03/2025
+        posts = load_posts()  # Load posts from POSTS_DB - KR 02/04/2025
         return render_template('blogpage.html', posts=posts, user=session['user'])
 
     @app.route('/post', methods=['POST'])
@@ -84,34 +82,61 @@ def register_routes(app):
 
         content = request.form.get('content')
         if not content:
-            flash("Post content cannot be empty.")  # Validate empty post - KR 28/03/2025
+            flash("Post cannot be empty.")  # Validate empty post - KR 28/03/2025
             return redirect(url_for('blogpage'))
 
         email = session['user']
-        users = load_users()
-        user = next((u for u in users if u['email'] == email), None)
-        author_name = user.get('full_name', 'Anonymous') if user else "Anonymous"
+        user = get_user(email)
+        author_name = user.get('full_name')
 
         new_post = {
+            'id': str(uuid.uuid4()), #generates a unique ID for each post - KR 02/04/2025
             'author': author_name,
             'content': content,
             'likes': 0,
             'comments': []
         }
 
-        save_post(new_post)  # Save to posts.json using helper - KR 28/03/2025
+        save_post(new_post)  # Save to POSTS_DB - KR 02/04/2025
         flash("Your post was published successfully.")
         return redirect(url_for('blogpage'))
     
-    @app.route('/comment/<int:post_id>', methods=['POST']) #added code for comment functionality - KR 02/04/2025
+    @app.route('/comment/<post_id>', methods=['POST'])
     def add_comment(post_id):
+        if 'user' not in session:
+            flash ("You must be logged in to comment.")
+            return redirect(url_for('login'))
+        
         comment = request.form.get('comment')
         if comment:
             post = find_post_by_id(post_id)
-            post['comments'].append(comment)
-            flash('Comment added!')
-            return redirect(url_for('blogpage'))
+            if post:
+                post['comments'].append(comment)
+                update_post(post_id, post)  # Update the post in POSTS_DB - KR 02/04/2025
+                flash("Comment added!")
+            else:
+                flash("Post not found.")
+        else:
+            flash("Comment cannot be empty.")
+        return redirect(url_for('blogpage'))
     
+    @app.route('/delet_post/<post_id>', methods=['POST'])
+    def delete_post_route(post_id):
+        if 'user' not in session:
+            flash("You must be logged in to delete posts.")
+            return redirect(url_for('login'))
+
+        post = find_post_by_id(post_id)
+        if post:
+            if post['author'] == session.get('name'):
+                delete_post(post_id)
+                flash("Post deleted.")
+            else:
+                flash("You can only delete your own posts.")
+        else:
+            flash("Post not found.")
+        return redirect(url_for('blogpage'))
+
     @app.route('/resources')
     def resources():
         return render_template("resources.html")

@@ -1,75 +1,55 @@
-import json
+import shelve
+import uuid
 import os
 
-def get_users_file():
-    """Returns the correct path to the users.json file"""
-    data_dir = os.path.join(os.path.dirname(__file__), 'data')
-    users_file = os.path.join(data_dir, 'users.json')
+DATA-DIR = os.path.join(os.path.dirname(__file__), 'data')
 
-    # Ensure the data directory exists - KR 27/03/2025
-    if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
+#ensure the data directory exists - KR 02/04/2025
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR)
 
-    # Ensure users.json exists - KR 27/03/2025
-    if not os.path.exists(users_file):
-        with open(users_file, 'w') as f:
-            json.dump([], f)  # Initialize with an empty list if users.json does not exist - KR 27/03/2025
+USERS_DB = os.path.join(DATA_DIR, 'users.db')
+POSTS_DB = os.path.join(DATA_DIR, 'posts.db')
 
-    return users_file
-
+# USER FUNCTIONS
 def load_users():
-    """Load users from users.json file"""
-    users_file = get_users_file()
-    try:
-        with open(users_file, 'r') as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+    """Load users as a list"""
+    with shelve.open(USERS_DB) as db:
+        return list(db.values())
 
-def save_users(users):
-    """Save users to users.json file"""
-    users_file = get_users_file()
-    with open(users_file, 'w') as f:
-        json.dump(users, f, indent=2)
+def save_user(user):
+    """save a user by their email as a key"""
+    with shelve.open(USERS_DB, writeback=True) as db:
+        db[user['email']] = user
 
-def save_user(new_user):
-    """Append a new user to users.json"""
-    users = load_users()
-    users.append(new_user)
-    save_users(users)    #Updated code to append a new user to users.json - KR 28/03/2025
-
-def get_posts_file():
-    """Returns the correct path to the posts.json file"""
-    data_dir = os.path.join(os.path.dirname(__file__), 'data')
-    posts_file = os.path.join(data_dir, 'posts.json')
-
-    # Ensure the data directory exists - kr 28/03/2025
-    if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
-
-    # Ensure posts.json exists - KR 28/03/2025
-    if not os.path.exists(posts_file):
-        with open(posts_file, 'w') as f:
-            json.dump([], f)
-
-    return posts_file
-
+#POST FUNCTIONS
 def load_posts():
-    """Load posts from posts.json file"""
-    posts_file = get_posts_file()
-    try:
-        with open(posts_file, 'r') as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+    """Load all posts as a list"""
+    with shelve.open(POSTS_DB) as db:
+        return sorted(db.values(), key=lambda p: p.get('created_at', ''), reverse=True)
+   
 
 def save_posts(posts):
-    """Save posts to posts.json file"""
-    posts_file = get_posts_file()
-    with open(posts_file, 'w') as f:
-        json.dump(posts, f, indent=2)
+    """This will save a post using a UUID if not already present"""
+    with shelve.open(POSTS_DB, writeback=True) as db:
+        if 'id' not in post:
+            post['id'] = str(uuid.uuid4())
+        db[post['id']] = post
 
-def save_post(new_post):
-    posts = load_posts()
-    posts.insert(0, new_post)  # inserts new post at the beginning of the list - KR 28/03/2025
-    save_posts(posts)
+def find_post_by_id(post_id):
+    """Find a post by its ID"""
+    with shelve.open(POSTS_DB) as db:
+        return db.get(post_id)
+    
+def update_post(post_id, updated_post):
+    """Update a post by its ID"""
+    with shelve.open(POSTS_DB, writeback=True) as db:
+        if post_id in db:
+            db[post_id].update(updated_post)
+            db[post_id] = updated_post
+
+def delete_post(post_id):
+    """Delete a post by its ID"""
+    with shelve.open(POSTS_DB, writeback=True) as db:
+        if post_id in db:
+            del db[post_id]
