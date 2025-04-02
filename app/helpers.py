@@ -34,12 +34,12 @@ def load_posts():
         return sorted(db.values(), key=lambda p: p.get('created_at', ''), reverse=True)
    
 
-def save_post(posts):
+def save_post(new_post):
     """This will save a post using a UUID if not already present"""
     with shelve.open(POSTS_DB, writeback=True) as db:
-        if 'id' not in post:
-            post['id'] = str(uuid.uuid4())
-        db[post['id']] = post
+        if 'id' not in new_post:
+            new_post['id'] = str(uuid.uuid4())
+        db[new_post['id']] = new_post
 
 def find_post_by_id(post_id):
     """Find a post by its ID"""
