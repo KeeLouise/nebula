@@ -2,7 +2,7 @@ import shelve
 import uuid
 import os
 
-DATA-DIR = os.path.join(os.path.dirname(__file__), 'data')
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data') #typo in previous version. Fixed. KR 02/04/2025
 
 #ensure the data directory exists - KR 02/04/2025
 if not os.path.exists(DATA_DIR):
