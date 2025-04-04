@@ -1,9 +1,9 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  background-color: black !important;
 }
 
 #container {
@@ -13,6 +13,8 @@ body {
   align-items: center;
   padding-top: 200px;
   box-sizing: border-box;
+  background-color: black;
+
 }
 
 .main-header {
@@ -34,10 +36,10 @@ body {
 }
 
 .login-box {
-  width: 100%;
+  width: 400px !important;
   max-width: 400px;
   padding: 20px;
-  margin-top: 150px;
+  margin-top: 125px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -57,6 +59,12 @@ form h2 {
 .btn-secondary {
   width: 100%;
   margin-top: 10px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding-top: 75px;
 }
 
 @media (max-width: 460px) {

@@ -29,11 +29,12 @@
   {% endif %}
 {% endwith %}
       <div class="login-box">
-        <form method="POST" action="{{ url_for('login') }}">
+        <form id="loginForm" method="POST" action="{{ url_for('login') }}">
           <h2>Login</h2>
           <div class="form-group">
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email" required>
+            <div id="emailError" class="form-text"></div>
           </div>
           <div class="form-group">
             <label for="password" class="form-label">Password</label>
@@ -44,7 +45,7 @@
         <a href="{{ url_for('register') }}" class="btn btn-secondary">Create an Account</a>
       </div>
     </main>
-    <footer class="text-center mt-5">
+    <footer>
       NEBULA &copy; Kiera Reidy 2025<br>
     </footer>
   </div>

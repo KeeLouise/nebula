@@ -132,20 +132,19 @@ def register_routes(app):
         return redirect(url_for('blogpage'))
 
     @app.route('/delete_post/<post_id>', methods=['POST'])
-    def delete_post(post_id):
+    def delete_post_route(post_id):
         if 'user' not in session:
             flash("You must be logged in to delete posts.")
             return redirect(url_for('login'))
 
         post = find_post_by_id(post_id)
-        if post:
-            if post['author'] == session.get('name'):
-                delete_post(post_id)
-                flash("Post deleted.")
-            else:
-                flash("You can only delete your own posts.")
-        else:
+        if not post:
             flash("Post not found.")
+        elif post['author'] != session.get('name'):
+            flash("You can only delete your own posts.")
+        else:
+            delete_post(post_id)
+            flash("Post deleted.")
         return redirect(url_for('blogpage'))
 
     @app.route('/resources')
