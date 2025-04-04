@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="container">
+    <div class="page-wrapper">
         <header>
             <div class="logo-container">
                 <img src="{{ url_for('static', filename='images/desktop-logo.png') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
@@ -59,19 +59,29 @@
 {% endwith %}
                 <h1>What's on your mind?</h1>
                 <div class="card p-3 mb-3">
-                    <h5>Create a New Post</h5>
+                    <h2>Create a New Post</h2>
                     <form method="POST" action="{{ url_for('create_post') }}">
                         <textarea name="content" class="form-control" rows="3" placeholder="Type your post here..." required></textarea>
                         <button type="submit" class="btn btn-primary mt-2">Post</button>
                     </form>
                 </div>
-                <h5 class="mt-4">Recent Posts</h5>
+                <h3>Recent Posts</h3>
 
 {% if posts %}
   {% for post in posts %}
   <div class="card p-3 mb-3">
     <p class="mb-1"><strong>{{ post.author }}</strong></p>
     <p>{{ post.content }}</p>
+    {% if session.name == post.author %}
+      <form method="POST" action="{{ url_for('delete_post_route', post_id=post.id) }}">
+        {% if session.name == post.author %}
+        <button type="submit" class="btn btn-sm btn-danger mb-2"
+                onclick="return confirm('Are you sure you want to delete this post?')">
+                Delete <i class="bi bi-trash"></i>
+        </button>
+        {% endif %}
+      </form>
+    {% endif %}
 
     {% if post.likes > 0 %}
     <p class="text-muted small mb-2">❤️ {{ post.likes }} likes</p>
@@ -113,7 +123,7 @@
             </aside>
         </div>
     </div>
-    <footer class="text-center mt-4">
+    <footer>
         NEBULA &copy; Kiera Reidy 2025
     </footer>
 <script src="{{url_for('static', filename='javascript/blogpage.js')}}"></script>
