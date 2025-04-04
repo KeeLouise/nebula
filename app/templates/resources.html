@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="container">
+    <div class="page-wrapper">
         <header>
             <div class="logo-container">
-                <img src="../static/images/desktop-logo.png" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
-                <img src="../static/images/mobiletablet-logo.png" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
+                <img src="{{ url_for('static', filename='images/desktop-logo.png') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
+                <img src="{{ url_for('static', filename='images/mobiletablet-logo.png') }}" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
             </div>
                 <div class="hamburger-menu">
                 <div class="bar"></div>
@@ -25,33 +25,49 @@
                     <li><a href="{{ url_for('blogpage') }}">Home</a></li>
                     <li><a href="{{ url_for('resources') }}">Resources</a></li>
                     <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-                </ul>
+                    <li>
+                        <form id="logoutForm" action="/logout" method="POST">
+                        <button id="logout" type="submit" class="logout-button">Logout
+                        </button></form></li>
+                    </ul>
                 </div>
             <nav>
                 <ul>
                     <li><a href="{{ url_for('blogpage') }}">Home</a></li>
                     <li><a href="{{ url_for('resources') }}">Resources</a></li>
                     <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
+                    <li>
+                        <form id="logoutForm1" action="/logout" method="POST">
+                            <button id="logout1" type="submit" class="logout-button">Logout
+                                <i class="bi bi-box-arrow-right"></i>
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </header>
         <div class="grid-container">
         <main>
-        <h1>
-            We have compiled a list of really useful resources below to assist you with your coding journey
-        </h1>
         <div id="resource-list">
-            <ul>
-                <li><a href="https://www.w3schools.com">W3 Schools</a></li>
-                <li><a href="https://www.freecodecamp.com">freeCodeCamp</a></li>
-                <li><a href="https://www.udemy.com">UDemy</a></li>
-                <li><a href="https://www.codeacademy.com">Code Academy</a></li>
-            </ul>
+            <h1>
+                We have compiled a list of really useful resources below to assist you with your coding journey
+            </h1>
+            <div class="resource-links">
+                <ul>
+                    <li><a href="https://www.w3schools.com">W3 Schools</a></li>
+                    <li><a href="https://www.freecodecamp.com">freeCodeCamp</a></li>
+                    <li><a href="https://www.udemy.com">UDemy</a></li>
+                    <li><a href="https://www.codeacademy.com">Code Academy</a></li>
+                </ul>
+            </div>
+            <div class="resource-video">
+                <iframe width="800" height="500" src="https://www.youtube.com/embed/zOjov-2OZ0E?si=JT7RlwGrOtu_rpUE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
         </div>
     </main>
 </div>
 </div>
-    <footer class="text-center mt-4">
+    <footer>
         NEBULA &copy; Kiera Reidy 2025
     </footer>
 <script src="{{ url_for('static', filename='javascript/resources.js') }}"></script>
