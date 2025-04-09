@@ -22,4 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    const toggle = document.getElementById('guidelines-toggle');
+    const content = document.getElementById('guidelines-content');
+    
+    toggle.addEventListener('click', () => {
+        content.classList.toggle('show');
+    });
 });
