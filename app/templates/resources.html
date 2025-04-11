@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>NEBULA - Junior Coding Community</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/css/resources.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <title>NEBULA - Junior Coding Community</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/css/resources.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="page-wrapper">
-        <header>
-            <div class="logo-container">
-                <img src="{{ url_for('static', filename='images/desktop-logo.png') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
-                <img src="{{ url_for('static', filename='images/mobiletablet-logo.png') }}" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
+  <div class="page-wrapper">
+    <header>
+      <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/desktop-logo.png') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
+        <img src="{{ url_for('static', filename='images/mobiletablet-logo.png') }}" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div id="mobile-nav">
+        <ul>
+          <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+          <li><a href="{{ url_for('resources') }}">Resources</a></li>
+          <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
+          <li>
+            <form id="logoutForm" action="/logout" method="POST">
+              <button id="logout" type="submit" class="logout-button">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+          <li><a href="{{ url_for('resources') }}">Resources</a></li>
+          <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
+          <li>
+            <form id="logoutForm1" action="/logout" method="POST">
+              <button id="logout1" type="submit" class="logout-button">Logout <i class="bi bi-box-arrow-right"></i></button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="grid-container">
+        <main class="main-content">
+          <div class="resource-content">
+            <div class="resource-column resource-left">
+              <h1>We have compiled a list of really useful resources below to assist you with your coding journey</h1>
+              <ul>
+                <li><a href="https://www.w3schools.com">W3 Schools</a></li>
+                <li><a href="https://www.freecodecamp.com">freeCodeCamp</a></li>
+                <li><a href="https://www.udemy.com">UDemy</a></li>
+                <li><a href="https://www.codeacademy.com">Code Academy</a></li>
+              </ul>
             </div>
-                <div class="hamburger-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                </div>
-                <div id="mobile-nav">
-                <ul>
-                    <li><a href="{{ url_for('blogpage') }}">Home</a></li>
-                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
-                    <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-                    <li>
-                        <form id="logoutForm" action="/logout" method="POST">
-                        <button id="logout" type="submit" class="logout-button">Logout
-                        </button></form></li>
-                    </ul>
-                </div>
-            <nav>
-                <ul>
-                    <li><a href="{{ url_for('blogpage') }}">Home</a></li>
-                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
-                    <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-                    <li>
-                        <form id="logoutForm1" action="/logout" method="POST">
-                            <button id="logout1" type="submit" class="logout-button">Logout
-                                <i class="bi bi-box-arrow-right"></i>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <div class="grid-container">
-        <main>
-        <div id="resource-list">
-            <h1>
-                We have compiled a list of really useful resources below to assist you with your coding journey
-            </h1>
-            <div class="resource-links">
-                <ul>
-                    <li><a href="https://www.w3schools.com">W3 Schools</a></li>
-                    <li><a href="https://www.freecodecamp.com">freeCodeCamp</a></li>
-                    <li><a href="https://www.udemy.com">UDemy</a></li>
-                    <li><a href="https://www.codeacademy.com">Code Academy</a></li>
-                </ul>
+            <div class="resource-column resource-right">
+              <h2>Featured tutorial of the month:</h2>
+              <iframe src="https://www.youtube.com/embed/zOjov-2OZ0E?si=JT7RlwGrOtu_rpUE"
+                      title="YouTube video player" allowfullscreen></iframe>
             </div>
-            <div class="resource-video">
-                <iframe width="800" height="500" src="https://www.youtube.com/embed/zOjov-2OZ0E?si=JT7RlwGrOtu_rpUE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-    </main>
-</div>
-</div>
+          </div>
+        </main>
+      </div>
+
     <footer>
-        NEBULA &copy; Kiera Reidy 2025
+      NEBULA &copy; Kiera Reidy 2025
     </footer>
-<script src="{{ url_for('static', filename='javascript/resources.js') }}"></script>
+  </div>
+  <script src="{{ url_for('static', filename='javascript/resources.js') }}"></script>
 </body>
 </html>
