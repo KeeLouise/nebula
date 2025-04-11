@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from .helpers import (
     load_users, save_user, get_user, load_posts,
-    save_post, save_posts, find_post_by_id, update_post, delete_post
+    save_post, save_posts, find_post_by_id, update_post, delete_post, get_programming_joke
 )
 import uuid  # for generating unique post IDs - KR 02/04/2025
 
@@ -147,10 +147,6 @@ def register_routes(app):
             flash("Post deleted.")
         return redirect(url_for('blogpage'))
 
-    @app.route('/resources')
-    def resources():
-        return render_template("resources.html")
-
     @app.route('/merchandise')
     def merchandise():
         return render_template("merchandise.html")
@@ -159,3 +155,8 @@ def register_routes(app):
     def logout():
         session.pop('user', None)
         return redirect(url_for('login'))
+
+    @app.route('/resources')
+    def resources():
+        joke = get_programming_joke() #Joke RESTful API - KR 11/04/2025
+        return render_template('resources.html', joke=joke)

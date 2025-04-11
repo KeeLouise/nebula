@@ -188,6 +188,16 @@
     border: none;
     border-radius: 8px;
   }
+
+  .joke-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin-top: 40px;
+    border-left: 5px solid purple;
+    border-radius: 10px;
+    color: white;
+    font-family: monospace;
+  }
   
   footer {
     font-family: sans-serif;

@@ -1,4 +1,4 @@
-import shelve, uuid, os
+import shelve, uuid, os, requests
 from datetime import datetime, timezone
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data') #typo in previous version. Fixed. KR 02/04/2025
@@ -66,3 +66,10 @@ def delete_post(post_id):
     with shelve.open(POSTS_DB, writeback=True) as db:
         if post_id in db:
             del db[post_id]
+
+#REST API for Programming Jokes
+def get_programming_joke():
+    url = "https://v2.jokeapi.dev/joke/Programming?safe-mode"
+    res = requests.get(url)
+    data = res.json()
+    return data

@@ -48,6 +48,16 @@
 
     <div class="grid-container">
         <main class="main-content">
+            {% if joke %}
+  <div class="joke-box">
+    {% if joke.type == 'single' %}
+      <p>{{ joke.joke }}</p>
+    {% else %}
+      <p>{{ joke.setup }}</p>
+      <p><strong>{{ joke.delivery }}</strong></p>
+    {% endif %}
+  </div>
+{% endif %}
           <div class="resource-content">
             <div class="resource-column resource-left">
               <h1>We have compiled a list of really useful resources below to assist you with your coding journey</h1>
