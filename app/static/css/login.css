@@ -73,9 +73,7 @@ footer {
 
   body, html {
     background-image: url("/static/images/background-image-mobile-tablet.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+     
   }
 
   .desktop-logo {
