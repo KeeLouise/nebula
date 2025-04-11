@@ -3,7 +3,10 @@ body, html {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
-  background-color: black !important;
+  background-image: url("/static/images/background-image-desktop.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #container {
@@ -13,8 +16,6 @@ body, html {
   align-items: center;
   padding-top: 200px;
   box-sizing: border-box;
-  background-color: black;
-
 }
 
 .main-header {
@@ -40,7 +41,7 @@ body, html {
   max-width: 400px;
   padding: 20px;
   margin-top: 125px;
-  background: white;
+  background-color: rgba(255, 255, 255, 0.7) !important;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: left;
@@ -62,12 +63,21 @@ form h2 {
 }
 
 footer {
-  background-color: black;
   color: white;
+  font-family: sans-serif;
+  font-weight: bolder;
   padding-top: 75px;
 }
 
 @media (max-width: 460px) {
+
+  body, html {
+    background-image: url("/static/images/background-image-mobile-tablet.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   .desktop-logo {
     display: none;
   }
@@ -79,15 +89,17 @@ footer {
   #container {
     padding: 140px 20px 0;
   }
+  
 
   .login-box {
-    width: 100%;
+    width: 275px !important;
     margin-top: 120px;
 
   }
 }
 
 @media (min-width: 600px) and (max-width: 1179px) {
+
   .desktop-logo {
     display: none;
   }
