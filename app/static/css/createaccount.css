@@ -28,6 +28,17 @@ body, html {
   z-index: 100;
 }
 
+.login-box {
+  width: 400px !important;
+  max-width: 400px;
+  padding: 20px;
+  margin-top: 125px;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
 .desktop-logo {
   display: inline;
 }
@@ -43,19 +54,27 @@ h1 {
   color: white !important;
 }
 
-form {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px black;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 50px;
-}
-
 .form-group {
   margin-bottom: 15px;
   text-align: center;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.input-icon input.form-control {
+  padding-left: 35px;
 }
 
 .btn-primary {
@@ -73,14 +92,24 @@ footer {
 
 @media (max-width: 600px) {
   body, html {
-    height: auto;
-    padding: 20px;
     background-image: url("/static/images/background-image-mobile-tablet.webp");
-  }
+    }
 
   #container {
-    width: 90%;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 20px;
+    padding-top: 25px;
+  }
+
+  .login-box {
+    width: 300px !important;
+    margin-top: 300px;
   }
 
   .desktop-logo {
@@ -107,5 +136,10 @@ footer {
 
   .mobiletablet-logo {
     display: block;
+  }
+
+  #container {
+    width: 90%;
+    text-align: center;
   }
 }

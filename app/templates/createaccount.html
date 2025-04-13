@@ -31,28 +31,48 @@
     </div>
   {% endif %}
 {% endwith %}
-    <h1>Create Your Account</h1>
-    <form id="createAccount" method="POST">
-      <div class="form-group">
-        <label for="fullname" class="form-label">Full Name</label>
-        <i class="bi bi-person"></i><input type="text" class="form-control" id="fullname" name="fullname" placeholder="Your full name" required>
+<div class="login-box">
+  <form id="createAccount" method="POST">
+    <h2 class="text-center">Create Your Account</h2>
+
+    <div class="form-group">
+      <label for="fullname" class="form-label">Full Name</label>
+      <div class="input-icon">
+        <i class="bi bi-person"></i>
+        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Your full name" required>
+      </div>
     </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <i class="bi bi-envelope"></i><input type="email" class="form-control" id="inputEmail1" name="email" placeholder="Enter email" required>
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+    <div class="form-group">
+      <label for="inputEmail1">Email address</label>
+      <div class="input-icon">
+        <i class="bi bi-envelope"></i>
+        <input type="email" class="form-control" id="inputEmail1" name="email" placeholder="Enter email" required>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <i class="bi bi-lock"></i><input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Password" required>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword1">Password</label>
+      <div class="input-icon">
+        <i class="bi bi-lock"></i>
+        <input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Password" required>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Confirm Password</label>
-        <i class="bi bi-lock"></i><input type="password" class="form-control" id="inputPassword2" name="confirm_password" placeholder="Confirm Password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword2">Confirm Password</label>
+      <div class="input-icon">
+        <i class="bi bi-lock"></i>
+        <input type="password" class="form-control" id="inputPassword2" name="confirm_password" placeholder="Confirm Password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Create My Account</button>
-    </form>
-    <button type="button" class="btn btn-primary" onclick="location.href='{{ url_for('login') }}'">Return to Login page</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create My Account</button>
+    <a href="{{ url_for('login') }}" class="btn btn-secondary d-block mx-auto mt-2">Return to Login page</a>
+  </form>
+</div>
+    
 </main>
 <footer>
 NEBULA &copy; Kiera Reidy 2025<br>
