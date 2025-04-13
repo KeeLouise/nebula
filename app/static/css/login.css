@@ -84,6 +84,33 @@ footer {
     display: block;
   }
 
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  .mobiletablet-logo {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .main-header {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    z-index: 100;
+  }
+
   #container {
     padding: 140px 20px 0;
   }
@@ -106,10 +133,38 @@ footer {
     display: block;
   }
 
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .main-header {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    z-index: 100;
+  }
+  
+  .mobiletablet-logo {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+  }
+
   .login-box {
     width: 100%;
     margin-top: 100px;
 
   }
+
 
 }
