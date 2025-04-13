@@ -12,10 +12,11 @@ body, html {
 #container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* pushes footer to bottom */
+  align-items: center;
+  justify-content: flex-start;
   min-height: 100vh;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 200px;
   box-sizing: border-box;
 }
 
@@ -37,7 +38,6 @@ body, html {
   background-color: rgba(255, 255, 255, 0.7) !important;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: left;
 }
 
 .desktop-logo {
@@ -146,6 +146,18 @@ footer {
     display: block;
   }
 
+  #container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    padding-top: 25px;
+  }
+
   form {
     width: 100%;
   }
@@ -167,6 +179,18 @@ footer {
   #container {
     width: 90%;
     text-align: center;
+  }
+
+  #container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    padding-top: 25px;
   }
 
   .logo-container {
