@@ -1,10 +1,12 @@
 body, html {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-image: url("/static/images/background-image-desktop.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #container {
@@ -38,6 +40,7 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   padding-top: 200px;
   padding-bottom: 20px;
+  color: white !important;
 }
 
 form {
@@ -61,10 +64,18 @@ form {
   width: 100%;
 }
 
+footer {
+  color: white;
+  font-family: sans-serif;
+  font-weight: bolder;
+  padding-top: 75px;
+}
+
 @media (max-width: 600px) {
   body, html {
     height: auto;
     padding: 20px;
+    background-image: url("/static/images/background-image-mobile-tablet.webp");
   }
 
   #container {

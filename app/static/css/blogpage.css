@@ -114,7 +114,7 @@ nav ul li a:hover,
 .grid-container {
     width: 100vw;
     padding-top: 10px;
-    background-image: url("/static/images/blog-background-image-desktop.webp");
+    background-image: url("/static/images/background-image-desktop.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -146,6 +146,7 @@ h2, h3 {
 p.text-muted {
     color: white !important;
 }
+
 
 .card {
     border-radius: 10px;
@@ -265,6 +266,10 @@ footer {
 
     .logo-container {
         width: 100%;
+    }
+
+    .grid-container {
+        background-image: url("/static/images/background-image-mobile-tablet.webp");
     }
 
     header {

@@ -111,7 +111,7 @@
   .grid-container {
     width: 100vw;
     padding: 30px 20px;
-    background-image: url("/static/images/blog-background-image-desktop.webp");
+    background-image: url("/static/images/background-image-desktop.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -146,26 +146,38 @@
   
   .resource-left {
     flex: 1;
-    max-width: 40%;
-    min-width: 250px;
+    max-width: 50%;
+    min-width: 400px;
   }
   
   .resource-right {
     flex: 1;
-    max-width: 55%;
-    min-width: 300px;
+    max-width: 50%;
+    min-width: 400px;
     align-items: flex-end;
   }
   
-  .resource-left h1,
+  .resource-left h1{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: center;
+    margin-left: auto;
+  }
   .resource-right h2 {
     margin-bottom: 20px;
     font-weight: bold;
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: ;
+    margin-right: auto;
   }
   
   .resource-left ul {
     list-style: none;
     padding-left: 0;
+    text-align: center;
   }
   
   .resource-left ul li {
@@ -187,6 +199,7 @@
     aspect-ratio: 16 / 9;
     border: none;
     border-radius: 8px;
+    align-items: center;
   }
 
   .joke-box {
@@ -220,11 +233,22 @@
       max-width: 100%;
       text-align: center;
       align-items: center;
+      justify-content: center;
     }
   
     .resource-right iframe {
       width: 100%;
       height: auto;
+    }
+  
+    .grid-container {
+      background-image: url("/static/images/background-image-mobile-tablet.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
     }
   }
   
@@ -239,10 +263,14 @@
   
     .logo-container {
       width: 100%;
+      text-align: center;
     }
   
     header {
+      display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
   
@@ -282,5 +310,35 @@
       background-color: #333;
       margin: 2px 0;
     }
+  
+    .grid-container {
+      min-height: 100vh;
+      background-image: url("/static/images/background-image-mobile-tablet.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+  
+    .main-content {
+      width: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  
+    .resource-left,
+    .resource-right {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .resource-right iframe {
+      width: 100%;
+      max-width: 100%;
+    }
   }
-
