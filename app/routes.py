@@ -1,10 +1,12 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from .helpers import (
+    User, Post,
     load_users, save_user, get_user, load_posts,
     save_post, save_posts, find_post_by_id, update_post, delete_post, get_programming_joke
 )
-import uuid  # for generating unique post IDs - KR 02/04/2025
+from datetime import datetime
+import uuid
 
 
 def register_routes(app):
@@ -19,9 +21,9 @@ def register_routes(app):
             password = request.form.get('password')
 
             user = get_user(email)
-            if user and check_password_hash(user['password'], password):
+            if user and check_password_hash(user.password, password):
                 session['user'] = email
-                session['name'] = user.get('full_name', 'User')
+                session['name'] = user.full_name
                 return redirect(url_for('blogpage'))
 
             flash("Invalid email or password. Please try again or register.")
@@ -37,7 +39,7 @@ def register_routes(app):
             password = request.form.get('password')
             confirm_password = request.form.get('confirm_password')
 
-            # Validation checks - KR 28/03/2025
+            # Validation checks
             if not all([full_name, email, password, confirm_password]):
                 flash("All fields are required.")
                 return redirect(url_for('register'))
@@ -52,30 +54,24 @@ def register_routes(app):
 
             if get_user(email):
                 flash("Email already registered.")
-                return redirect(url_for('register'))  # Redirects to login page if email is already in use - KR 02/04/2025
+                return redirect(url_for('register'))
 
-            # Hash and save user via helpers.py - KR 28/03/2025
             hashed_password = generate_password_hash(password)
+            new_user = User(full_name, email, hashed_password)
+            save_user(new_user)
 
-            new_user = {
-                'full_name': full_name,
-                'email': email,
-                'password': hashed_password
-            }
-
-            save_user(new_user)  # Save using helper for clean code - KR 28/03/2025
             flash("Account created successfully! Please log in.")
-            return redirect(url_for('login'))  # Redirects to login page after registration - KR 28/03/2025
+            return redirect(url_for('login'))
 
-        return render_template('createaccount.html')  # Show registration form - KR 28/03/2025
+        return render_template('createaccount.html')
 
     @app.route('/blog', methods=['GET'])
     def blogpage():
         if 'user' not in session:
-            flash("You must be logged in to view this page.")  # Prevent unauthenticated access - KR 28/03/2025
+            flash("You must be logged in to view this page.")
             return redirect(url_for('login'))
 
-        posts = load_posts()  # Load posts from POSTS_DB - KR 02/04/2025
+        posts = load_posts()
         return render_template('blogpage.html', posts=posts, user=session['user'])
 
     @app.route('/post', methods=['POST'])
@@ -86,22 +82,19 @@ def register_routes(app):
 
         content = request.form.get('content')
         if not content:
-            flash("Post cannot be empty.")  # Validate empty post - KR 28/03/2025
+            flash("Post cannot be empty.")
             return redirect(url_for('blogpage'))
 
-        email = session['user']
-        user = get_user(email)
-        author_name = user.get('full_name')
-
-        new_post = {
-            'id': str(uuid.uuid4()),  # generates a unique ID for each post - KR 02/04/2025
-            'author': author_name,
-            'content': content,
-            'likes': 0,
-            'comments': []
-        }
-
-        save_post(new_post)  # Save to POSTS_DB - KR 02/04/2025
+        user = get_user(session['user'])
+        new_post = Post(
+            id=str(uuid.uuid4()),
+            author=user.full_name,
+            content=content,
+            created_at=datetime.utcnow().isoformat(),
+            likes=0,
+            comments=[]
+        )
+        save_post(new_post)
         flash("Your post was published successfully.")
         return redirect(url_for('blogpage'))
 
@@ -111,24 +104,21 @@ def register_routes(app):
             flash("You must be logged in to comment.")
             return redirect(url_for('login'))
 
-        comment_text = request.form.get('comment')  # Now it's inside the function
-
+        comment_text = request.form.get('comment')
         if not comment_text:
             flash("Comment cannot be empty.")
             return redirect(url_for('blogpage'))
 
-        posts = load_posts()
-        for post in posts:
-            if post['id'] == post_id:
-                comment = {
-                    "author": session.get('name', 'Anonymous'),
-                    "text": comment_text
-                }
-                post['comments'].append(comment)
-                break
+        post = find_post_by_id(post_id)
+        if post:
+            comment = {
+                "author": session.get('name', 'Anonymous'),
+                "text": comment_text
+            }
+            post.comments.append(comment)
+            update_post(post_id, post)
+            flash("Comment added!")
 
-        save_posts(posts)  # Save updated post list - KR 02/04/2025
-        flash("Comment added!")
         return redirect(url_for('blogpage'))
 
     @app.route('/delete_post/<post_id>', methods=['POST'])
@@ -140,23 +130,35 @@ def register_routes(app):
         post = find_post_by_id(post_id)
         if not post:
             flash("Post not found.")
-        elif post['author'] != session.get('name'):
+        elif post.author != session.get('name'):
             flash("You can only delete your own posts.")
         else:
             delete_post(post_id)
             flash("Post deleted.")
         return redirect(url_for('blogpage'))
 
+    @app.route('/like_post/<post_id>', methods=['POST'])
+    def like_post(post_id):
+        if 'user' not in session:
+            flash("You must be logged in to like posts.")
+            return redirect(url_for('login'))
+
+        post = find_post_by_id(post_id)
+        if post:
+            post.likes += 1
+            update_post(post_id, post)
+        return redirect(url_for('blogpage'))
+
     @app.route('/merchandise')
     def merchandise():
         return render_template("merchandise.html")
 
-    @app.route('/logout', methods=['POST'])  # Logout Test - KR 31/03/2025
+    @app.route('/logout', methods=['POST'])
     def logout():
         session.pop('user', None)
         return redirect(url_for('login'))
 
     @app.route('/resources')
     def resources():
-        joke = get_programming_joke() #Joke RESTful API - KR 11/04/2025
+        joke = get_programming_joke()
         return render_template('resources.html', joke=joke)
