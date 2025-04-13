@@ -47,9 +47,9 @@ nav ul {
 
 nav ul li,
 #mobile-nav ul li {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 5px 10px;
-    font-size: 15px;
 }
 
 nav ul li a,
@@ -106,10 +106,15 @@ nav ul li a:hover,
     font-weight: bold;
     cursor: pointer;
     padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+    display: inline-block;
+    text-decoration: none;
+    font-family: inherit;
+    transition: color 0.3s;
+  }
+  
+  .logout-button:hover {
+    color: purple;
+  }
 
 .grid-container {
     width: 100vw;

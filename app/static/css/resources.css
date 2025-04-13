@@ -46,9 +46,9 @@
   }
   
   nav ul li, #mobile-nav ul li {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 5px 10px;
-    font-size: 15px;
   }
   
   nav ul li a, #mobile-nav ul li a {
