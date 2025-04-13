@@ -163,6 +163,23 @@ p.text-muted {
     font-family: sans-serif;
 }
 
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #aaa;
+    pointer-events: none;
+  }
+
 .post-scroll {
     max-height: 400px;
     overflow-y: auto;
