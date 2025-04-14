@@ -10,12 +10,10 @@ body, html {
 }
 
 #container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  width: 100%;
   padding-top: 200px;
   box-sizing: border-box;
 }
@@ -34,10 +32,11 @@ body, html {
   width: 400px !important;
   max-width: 400px;
   padding: 20px;
-  margin-top: 125px !important;
+  margin-top: 125px;
   background-color: rgba(255, 255, 255, 0.7) !important;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
 .desktop-logo {
@@ -95,44 +94,9 @@ footer {
 @media (max-width: 600px) {
   body, html {
     background-image: url("/static/images/background-image-mobile-tablet.webp");
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    }
-
-  #container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    padding-top: 25px;
+     
   }
-
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0 auto;
-  }
-
-  .main-header {
-    position: absolute;
-    top: 20px;
-    left: 0px;
-    right: 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    z-index: 100;
-  }
-
+  
   .login-box {
     width: 300px !important;
     margin-top: 300px;
@@ -144,8 +108,20 @@ footer {
 
   .mobiletablet-logo {
     display: block;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
   }
 
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
   #container {
     width: 100%;
     min-height: 100vh;
@@ -156,6 +132,17 @@ footer {
     text-align: center;
     padding: 20px;
     padding-top: 25px;
+  }
+
+  .main-header {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    z-index: 100;
   }
 
   form {
@@ -199,7 +186,4 @@ footer {
     align-items: center;
     padding: 0;
     margin: 0 auto;
-  }
-
-  
-}
+  }}

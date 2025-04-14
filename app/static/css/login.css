@@ -80,10 +80,6 @@ footer {
     display: none;
   }
 
-  .mobiletablet-logo {
-    display: block;
-  }
-
   .logo-container {
     display: flex;
     justify-content: center;
