@@ -63,3 +63,28 @@ class User:
             "price": self.price,
             "image_url": self.image_url
         }
+     
+     @classmethod
+     def from_dict(cls, data):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            price=data.get("price"),
+            image_url=data.get("image_url")
+        )
+
+class Cart:
+    def __init__(self):
+        self.items = []  # list of product objects - kr 15/04/2025
+
+    def add_item(self, product):
+        self.items.append(product)
+
+    def remove_item(self, product_id):
+        self.items = [item for item in self.items if item.id != product_id]
+
+    def total_price(self):
+        return sum(item.price for item in self.items)
+
+    def to_dict(self):
+        return [item.to_dict() for item in self.items]
