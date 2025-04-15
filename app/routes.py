@@ -90,7 +90,7 @@ def register_routes(app):
             id=str(uuid.uuid4()),
             author=user.full_name,
             content=content,
-            created_at=datetime.utcnow().isoformat(),
+            created_at=datetime.timezone.utc().isoformat(),
             likes=0,
             comments=[]
         )

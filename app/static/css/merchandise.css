@@ -1,27 +1,27 @@
 .desktop-logo {
     display: block;
-}
-
-.mobiletablet-logo {
+  }
+  
+  .mobiletablet-logo {
     display: none;
-}
-
-html, body {
+  }
+  
+  html, body {
     background-color: white;
     font-family: Arial, sans-serif;
     margin: 0;
-}
-
-.page-wrapper {
+  }
+  
+  .page-wrapper {
     width: 100vw;
     padding: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
-}
-
-header {
+  }
+  
+  header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,44 +29,41 @@ header {
     background-color: white;
     border-bottom: 2px solid #ddd;
     width: 100%;
-}
-
-nav ul, #mobile-nav ul {
+  }
+  
+  nav ul, #mobile-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     display: flex;
     gap: 20px;
     justify-content: flex-end;
     flex-wrap: wrap;
-}
-
-nav ul li,
-#mobile-nav ul li {
+  }
+  
+  nav ul li, #mobile-nav ul li {
     display: inline-flex;
     align-items: center;
     padding: 5px 10px;
-}
-
-nav ul li a,
-#mobile-nav ul li a {
+  }
+  
+  nav ul li a, #mobile-nav ul li a {
     text-decoration: none;
     font-size: 18px;
     color: black;
     font-weight: bold;
     transition: color 0.3s;
-}
-
-nav ul li a:hover,
-#mobile-nav ul li a:hover {
+  }
+  
+  nav ul li a:hover, #mobile-nav ul li a:hover {
     color: purple;
-}
-
-#mobile-nav {
+  }
+  
+  #mobile-nav {
     display: none;
     position: absolute;
     top: 60px;
@@ -76,29 +73,29 @@ nav ul li a:hover,
     padding: 10px;
     border: 1px solid grey;
     z-index: 1000;
-}
-
-#mobile-nav.active {
+  }
+  
+  #mobile-nav.active {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 15px;
-}
-
-.hamburger-menu {
+  }
+  
+  .hamburger-menu {
     display: none;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-}
-
-.hamburger-menu .bar {
+  }
+  
+  .hamburger-menu .bar {
     width: 30px;
     height: 3px;
     background-color: black;
-}
-
-.logout-button {
+  }
+  
+  .logout-button {
     background: none;
     border: none;
     color: black;
@@ -106,30 +103,24 @@ nav ul li a:hover,
     font-weight: bold;
     cursor: pointer;
     padding: 5px 10px;
-    display: inline-block;
-    text-decoration: none;
-    font-family: inherit;
-    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
   
-  .logout-button:hover {
-    color: purple;
-  }
-
-.grid-container {
+  .grid-container {
     width: 100vw;
-    padding-top: 10px;
+    padding: 30px 20px;
     background-image: url("/static/images/background-image-desktop.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-footer {
+    justify-content: center;
+  }
+  
+  
+  footer {
     font-family: sans-serif;
     font-weight: bold;
     background-color: white;
@@ -137,97 +128,98 @@ footer {
     padding-top: 100px;
     text-align: center;
     width: 100%;
-}
-
-@media (max-width: 830px) {
+  }
+  
+  @media (max-width: 768px) {
+  
     .grid-container {
-        padding: 0 10px;
-        text-align: left;
+      background-image: url("/static/images/background-image-mobile-tablet.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
     }
-
-    header {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-    }
-
-    nav ul {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 460px) {
+  }
+  
+  @media (max-width: 460px) {
     .desktop-logo {
-        display: none;
+      display: none;
     }
-
+  
     .mobiletablet-logo {
-        display: block;
+      display: block;
     }
-
-    .main-content {
-        width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        text-align: center;
-    }
-
-    .card {
-        background-color: white;
-        border-left: 5px solid #007bff;
-    }
-
+  
     .logo-container {
-        width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
     }
-
-    .grid-container {
-        background-image: url("/static/images/background-image-mobile-tablet.webp");
+    
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
     }
-
+  
     header {
-        flex-direction: column;
-        text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
-
+  
     nav ul {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 10px;
-        display: none;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      display: none;
     }
-
+  
     #mobile-nav.active {
-        display: block;
-        background-color: white;
-        border-top: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px 0;
+      display: block;
+      background-color: white;
+      border-top: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 0;
     }
-
+  
     nav ul li {
-        width: 100%;
-        padding: 10px 0;
+      width: 100%;
+      padding: 10px 0;
     }
-
+  
     nav ul li a {
-        font-size: 18px;
+      font-size: 18px;
     }
-
+  
     .hamburger-menu {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
     }
-
+  
     .hamburger-menu .bar {
-        width: 20px;
-        height: 3px;
-        background-color: #333;
-        margin: 2px 0;
+      width: 20px;
+      height: 3px;
+      background-color: #333;
+      margin: 2px 0;
+    }
+  
+    .grid-container {
+      min-height: 100vh;
+      background-image: url("/static/images/background-image-mobile-tablet.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
     }
 }
