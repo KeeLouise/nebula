@@ -5,9 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Explore NEBULA's exclusive junior coding community merchandise, including t-shirts, sweatshirts, mugs, caps, and more. Shop your favorite gear now!">
-  <link href="../static/css/merchandise.css" rel="stylesheet" type="text/css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="{{ url_for('static', filename='images/desktop-logo.webp') }}" type="image/webp">
+  <link href="{{ url_for('static', filename='css/merchandise.css') }}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
 </head>
 <body>
   <div class="page-wrapper">
@@ -60,7 +64,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitetshirt.webp">
-            <img src="/static/images/desktop-store-whitetshirt.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-whitetshirt.webp"
+              srcset="/static/images/desktop-store-whitetshirt.webp 660w, /static/images/desktop-store-whitetshirt@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA T-Shirt - White"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA T-Shirt - White</h2>
           <p class="product-price">€25.00</p>
@@ -69,7 +80,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blacktshirt.webp">
-            <img src="/static/images/desktop-store-blacktshirt.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-blacktshirt.webp"
+              srcset="/static/images/desktop-store-blacktshirt.webp 660w, /static/images/desktop-store-blacktshirt@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA T-Shirt - Black"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA T-Shirt - Black</h2>
           <p class="product-price">€25.00</p>
@@ -78,7 +96,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitesweatshirt.webp">
-            <img src="/static/images/desktop-store-whitesweatshirt.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-whitesweatshirt.webp"
+              srcset="/static/images/desktop-store-whitesweatshirt.webp 660w, /static/images/desktop-store-whitesweatshirt@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Sweat - White"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Sweat - White</h2>
           <p class="product-price">€45.00</p>
@@ -87,7 +112,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blacksweatshirt.webp">
-            <img src="/static/images/desktop-store-blacksweatshirt.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-blacksweatshirt.webp"
+              srcset="/static/images/desktop-store-blacksweatshirt.webp 660w, /static/images/desktop-store-blacksweatshirt@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Sweat - Black"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Sweat - Black</h2>
           <p class="product-price">€45.00</p>
@@ -96,7 +128,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blackhat.webp">
-            <img src="/static/images/desktop-store-blackhat.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-blackhat.webp"
+              srcset="/static/images/desktop-store-blackhat.webp 660w, /static/images/desktop-store-blackhat@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Baseball Cap"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Baseball Cap</h2>
           <p class="product-price">€15.00</p>
@@ -105,7 +144,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-keyring.webp">
-            <img src="/static/images/desktop-store-keyring.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-keyring.webp"
+              srcset="/static/images/desktop-store-keyring.webp 660w, /static/images/desktop-store-keyring@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Keyring"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Keyring</h2>
           <p class="product-price">€5.00</p>
@@ -114,7 +160,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitemug.webp">
-            <img src="/static/images/desktop-store-whitemug.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-whitemug.webp"
+              srcset="/static/images/desktop-store-whitemug.webp 660w, /static/images/desktop-store-whitemug@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Mug - White"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Mug - White</h2>
           <p class="product-price">€10.00</p>
@@ -123,7 +176,14 @@
         <div class="product">
           <picture>
             <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blackmug.webp">
-            <img src="/static/images/desktop-store-blackmug.webp" width="1024" height="1024" alt="Product Image" class="product-image">
+            <img
+              src="/static/images/desktop-store-blackmug.webp"
+              srcset="/static/images/desktop-store-blackmug.webp 660w, /static/images/desktop-store-blackmug@2x.webp 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="NEBULA Mug - Black"
+              class="product-image"
+            >
           </picture>
           <h2 class="product-title">NEBULA Mug - Black</h2>
           <p class="product-price">€10.00</p>
