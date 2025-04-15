@@ -19,16 +19,16 @@ class User:
             password=data.get("password")
         )
     
-    class Post:
-        def __init__(self, id, author, content, created_at, likes=0, comments=None):
-         self.id = id
-         self.author = author
-         self.content = content
-         self.created_at = created_at
-         self.likes = likes
-         self.comments = comments or []
+class Post:
+     def __init__(self, id, author, content, created_at, likes=0, comments=None):
+      self.id = id
+      self.author = author
+      self.content = content
+      self.created_at = created_at
+      self.likes = likes
+      self.comments = comments or []
 
-    def to_dict(self):
+     def to_dict(self):
         return {
             "id": self.id,
             "author": self.author,
@@ -38,8 +38,8 @@ class User:
             "comments": self.comments
         }
 
-    @classmethod
-    def from_dict(cls, data):
+     @classmethod
+     def from_dict(cls, data):
         return cls(
             id=data.get("id"),
             author=data.get("author"),
@@ -49,7 +49,7 @@ class User:
             comments=data.get("comments", [])
         )
     
-    class Product:
+class Product:
      def __init__(self, id, name, price, image_url):
         self.id = id
         self.name = name
