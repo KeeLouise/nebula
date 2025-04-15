@@ -5,7 +5,7 @@ from .helpers import (
     load_users, save_user, get_user, load_posts,
     save_post, save_posts, find_post_by_id, update_post, delete_post, get_programming_joke
 )
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 
 
@@ -90,7 +90,7 @@ def register_routes(app):
             id=str(uuid.uuid4()),
             author=user.full_name,
             content=content,
-            created_at=datetime.timezone.utc().isoformat(),
+            created_at = datetime.now(timezone.utc).isoformat(),
             likes=0,
             comments=[]
         )
