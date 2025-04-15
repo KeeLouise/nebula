@@ -1,6 +1,15 @@
-// Cart script - KR 15/04/2025
-
+// Hamburger nav script - KR 15/04/2025
 document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger-menu");
+    const mobileNav = document.querySelector("#mobile-nav");
+  
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+      });
+    }
+  
+    // Cart script - KR 15/04/2025
     const cartToggle = document.getElementById("cart-toggle");
     const cartDropdown = document.getElementById("cart-dropdown");
     const cartItemsList = document.getElementById("cart-items");
@@ -28,9 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
         li.style.alignItems = "center";
         li.style.marginBottom = "10px";
   
-        // Product Image - KR 15/04/2025
         const img = document.createElement("img");
-        img.src = item.image_url;
+        img.src = item.image_url || "";
         img.alt = item.name;
         img.style.width = "40px";
         img.style.height = "40px";
@@ -38,21 +46,19 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.marginRight = "10px";
         img.style.borderRadius = "6px";
   
-        // Product Info - KR 15/04/2025
         const text = document.createElement("span");
         text.textContent = `${item.name} - €${item.price.toFixed(2)}`;
   
-        // Remove Button - KR 15/04/2025
         const removeBtn = document.createElement("button");
         removeBtn.classList.add("remove-btn");
         removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
         removeBtn.setAttribute("aria-label", "Remove item");
         removeBtn.style.marginLeft = "10px";
-
+  
         removeBtn.addEventListener("click", () => {
-            cart.splice(index, 1);
-            saveCart();
-          });
+          cart.splice(index, 1);
+          saveCart();
+        });
   
         li.appendChild(img);
         li.appendChild(text);
@@ -67,16 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
     addToCartButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const productCard = button.closest(".product");
-        const title = productCard.querySelector(".product-title").textContent;
-        const priceText = productCard.querySelector(".product-price").textContent.replace("€", "");
+        const title = productCard.querySelector(".product-title")?.textContent || "Unknown";
+        const priceText = productCard.querySelector(".product-price")?.textContent.replace("€", "") || "0";
         const price = parseFloat(priceText);
-        const image = productCard.querySelector("img").getAttribute("src");
+        const image = productCard.querySelector("img")?.getAttribute("src") || "";
   
         const item = {
-            name: title,
-            price: price,
-            image_url: image
-          };
+          name: title,
+          price: price,
+          image_url: image
+        };
   
         cart.push(item);
         saveCart();
@@ -95,6 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   
-    // Initial load - KR 15/04/2025
+    // Load cart on page load - KR 15/04/2025
     updateCartUI();
   });
