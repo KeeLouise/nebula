@@ -232,7 +232,17 @@ body, html{
     width: 100%;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 830px) {
+  
+header {
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+  }
+  
+nav ul {
+          justify-content: center;
+}
     .resource-content {
       flex-direction: column;
       align-items: center;
@@ -258,11 +268,12 @@ body, html{
       background-repeat: no-repeat;
       display: flex;
       justify-content: center;
-      padding: 20px;
+      padding: 0 10px;
+          text-align: left;
     }
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 460px) {
     .desktop-logo {
       display: none;
     }
@@ -291,43 +302,44 @@ body, html{
       align-items: center;
       text-align: center;
     }
-  
-    nav ul {
+
+
+  nav ul {
       flex-direction: column;
       align-items: center;
       padding-top: 10px;
       display: none;
-    }
-  
-    #mobile-nav.active {
+  }
+
+  #mobile-nav.active {
       display: block;
       background-color: white;
       border-top: 1px solid #ddd;
       border-radius: 8px;
       padding: 10px 0;
-    }
-  
-    nav ul li {
+  }
+
+  nav ul li {
       width: 100%;
       padding: 10px 0;
-    }
-  
-    nav ul li a {
+  }
+
+  nav ul li a {
       font-size: 18px;
-    }
-  
-    .hamburger-menu {
+  }
+
+  .hamburger-menu {
       display: flex;
       flex-direction: column;
       cursor: pointer;
-    }
-  
-    .hamburger-menu .bar {
+  }
+
+  .hamburger-menu .bar {
       width: 20px;
       height: 3px;
       background-color: #333;
       margin: 2px 0;
-    }
+  }
 
     #container {
       display: flex;
