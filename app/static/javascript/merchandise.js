@@ -48,6 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
         removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
         removeBtn.setAttribute("aria-label", "Remove item");
         removeBtn.style.marginLeft = "10px";
+
+        removeBtn.addEventListener("click", () => {
+            cart.splice(index, 1);
+            saveCart();
+          });
   
         li.appendChild(img);
         li.appendChild(text);
