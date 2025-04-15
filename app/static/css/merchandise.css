@@ -34,11 +34,47 @@ header {
 }
 
 .cart-container {
-  position: absolute;
+  position: relative;
+  display: inline-block;
   right: 20px;
   top: 10px;
   margin: 0;
   text-align: right;
+}
+
+#cart-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: black;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 250px;
+  z-index: 1000;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Controlled by JS */
+}
+
+#cart-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#cart-dropdown ul li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#cart-dropdown p {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 @media (max-width: 460px) {
@@ -204,14 +240,29 @@ nav ul li a:hover, #mobile-nav ul li a:hover {
   cursor: pointer;
 }
 
+.cart-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* This is the actual dropdown */
 #cart-dropdown {
-  margin-top: 10px;
-  padding: 10px;
+  display: none; /* hidden by default */
+  position: absolute;
+  top: 100%;
+  right: 0;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
-  display: none;
-  text-align: left;
+  padding: 10px;
+  width: 250px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* When NOT hidden, it becomes visible */
+#cart-dropdown.show {
+  display: block;
 }
 
 #cart-dropdown ul {
