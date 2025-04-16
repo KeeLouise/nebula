@@ -165,13 +165,9 @@ def get_programming_joke():
         res = requests.get(url, timeout=5)
         res.raise_for_status()
         data = res.json()
-
-        if data.get("type") == "single":
-            return data.get("joke")
-        elif data.get("type") == "twopart":
-            return f"{data.get('setup')} — {data.get('delivery')}"
-        else:
-            return "We tried to find a joke, but it got lost in the code..."
-
+        return data
     except Exception as e:
-        return "Oops! Our joke server is having a bad day. Try again later."
+        return {
+            "type": "single",
+            "joke": "Oops! Our joke server is having a bad day. Try again later."
+        }
