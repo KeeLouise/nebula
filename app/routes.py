@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from app.models import product_list
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.helpers import (
@@ -8,7 +8,6 @@ from app.helpers import (
 )
 from datetime import datetime, timezone
 import uuid
-
 
 def register_routes(app):
     @app.route('/')
@@ -91,9 +90,10 @@ def register_routes(app):
             id=str(uuid.uuid4()),
             author=user.full_name,
             content=content,
-            created_at = datetime.now(timezone.utc).isoformat(),
+            created_at=datetime.now(timezone.utc).isoformat(),
             likes=0,
-            comments=[]
+            comments=[],
+            liked_by=set()
         )
         save_post(new_post)
         flash("Your post was published successfully.")
@@ -138,17 +138,37 @@ def register_routes(app):
             flash("Post deleted.")
         return redirect(url_for('blogpage'))
 
-    @app.route('/like_post/<post_id>', methods=['POST'])
-    def like_post(post_id):
+    @app.route('/toggle_like/<post_id>', methods=['POST'])
+    def toggle_like(post_id):
         if 'user' not in session:
+            if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+                return jsonify({"error": "Unauthorized"}), 401
             flash("You must be logged in to like posts.")
-            return redirect(url_for('login'))
+            return redirect(url_for('blogpage'))
 
+        user_email = session['user']
         post = find_post_by_id(post_id)
-        if post:
+        if not post:
+            return jsonify({"error": "Post not found"}), 404
+
+        # Ensure liked_by is initialized
+        if not hasattr(post, "liked_by") or post.liked_by is None:
+            post.liked_by = set()
+
+        # Convert liked_by to set if loaded as list
+        if isinstance(post.liked_by, list):
+            post.liked_by = set(post.liked_by)
+
+        # Toggle like
+        if user_email in post.liked_by:
+            post.liked_by.remove(user_email)
+            post.likes = max(post.likes - 1, 0)
+        else:
+            post.liked_by.add(user_email)
             post.likes += 1
-            update_post(post_id, post)
-        return redirect(url_for('blogpage'))
+
+        update_post(post_id, post)
+        return jsonify({"success": True, "likes": post.likes})
 
     @app.route('/merchandise')
     def merchandise():
@@ -163,7 +183,7 @@ def register_routes(app):
     def resources():
         joke = get_programming_joke()
         return render_template('resources.html', joke=joke)
-    
+
     @app.errorhandler(401)
     def unauthorized(e):
         return render_template("401.html", show_logo_only=True), 401
@@ -179,4 +199,3 @@ def register_routes(app):
     @app.errorhandler(500)
     def internal_error(e):
         return render_template('500.html', show_logo_only=True), 500
-    

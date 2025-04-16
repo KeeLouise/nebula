@@ -20,35 +20,45 @@ class User:
         )
     
 class Post:
-     def __init__(self, id, author, content, created_at, likes=0, comments=None):
-      self.id = id
-      self.author = author
-      self.content = content
-      self.created_at = created_at
-      self.likes = likes
-      self.comments = comments or []
+    def __init__(self, id, author, content, created_at, likes=0, comments=None, liked_by=None):
+        self.id = id
+        self.author = author
+        self.content = content
+        self.created_at = created_at
+        self.likes = likes
+        self.comments = comments or []
+        self.liked_by = liked_by or set()  # Store user emails or IDs
 
-     def to_dict(self):
+    def toggle_like(self, user_email):
+        if user_email in self.liked_by:
+            self.liked_by.remove(user_email)
+            self.likes -= 1
+        else:
+            self.liked_by.add(user_email)
+            self.likes += 1
+
+    def to_dict(self):
         return {
             "id": self.id,
             "author": self.author,
             "content": self.content,
             "created_at": self.created_at,
             "likes": self.likes,
-            "comments": self.comments
+            "comments": self.comments,
+            "liked_by": list(self.liked_by)
         }
 
-     @classmethod
-     def from_dict(cls, data):
+    @classmethod
+    def from_dict(cls, data):
         return cls(
             id=data.get("id"),
             author=data.get("author"),
             content=data.get("content"),
             created_at=data.get("created_at"),
             likes=data.get("likes", 0),
-            comments=data.get("comments", [])
+            comments=data.get("comments", []),
+            liked_by=set(data.get("liked_by", []))
         )
-    
 class Product:
      def __init__(self, id, name, price, image_url):
         self.id = id
