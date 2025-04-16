@@ -7,11 +7,11 @@
   {% if show_cart %}
   <!-- Cart only shows if show_cart=True - KR 16/04/2025 -->
   <div class="cart-container">
-    <button id="cart-toggle">🛒 My Cart (<span id="cart-count">0</span>)</button>
+    <button type="button" id="cart-toggle">🛒 My Cart (<span id="cart-count">0</span>)</button>
     <div id="cart-dropdown" class="hidden">
       <ul id="cart-items"></ul>
       <p>Total: €<span id="cart-total">0.00</span></p>
-      <button id="checkout-btn">Checkout</button>
+      <button type="button" id="checkout-btn">Checkout</button>
     </div>
   </div>
   {% endif %}
