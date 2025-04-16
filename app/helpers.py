@@ -132,6 +132,31 @@ def delete_post(post_id):
         if post_id in db:
             del db[post_id]
 
+def time_ago(iso_str):
+    try:
+        created_at = datetime.fromisoformat(iso_str)
+    except Exception:
+        return "some time ago"
+
+    now = datetime.now(timezone.utc)
+    diff = now - created_at
+
+    seconds = diff.total_seconds()
+    minutes = int(seconds // 60)
+    hours = int(minutes // 60)
+    days = int(hours // 24)
+
+    if seconds < 60:
+        return "just now"
+    elif minutes < 60:
+        return f"{minutes} minute{'s' if minutes != 1 else ''} ago"
+    elif hours < 24:
+        return f"{hours} hour{'s' if hours != 1 else ''} ago"
+    elif days < 7:
+        return f"{days} day{'s' if days != 1 else ''} ago"
+    else:
+        return created_at.strftime('%b %d, %Y')  # fallback to full date - KR 16/04/2025
+    
 # Programming Joke API
 def get_programming_joke():
     url = "https://v2.jokeapi.dev/joke/Programming?safe-mode"

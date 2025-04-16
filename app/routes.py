@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.helpers import (
     User, Post,
     save_user, get_user, load_posts,
-    save_post, find_post_by_id, update_post, delete_post, get_programming_joke
+    save_post, find_post_by_id, update_post, delete_post, get_programming_joke, time_ago
 )
 from datetime import datetime, timezone
 import uuid
@@ -72,7 +72,7 @@ def register_routes(app):
             return redirect(url_for('login'))
 
         posts = load_posts()
-        return render_template('blogpage.html', posts=posts, user=session['user'])
+        return render_template('blogpage.html', posts=posts, user=session['user'], time_ago=time_ago)
 
     @app.route('/post', methods=['POST'])
     def create_post():
