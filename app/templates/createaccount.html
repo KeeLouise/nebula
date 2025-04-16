@@ -1,83 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>NEBULA - Junior coding community!</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Community for junior coders, chat forum, resources">
-    <meta name="keywords" content="coding, programming, software, development">
-    <meta name="author" content="NEBULA">
-    <link href="{{url_for('static', filename='css/createaccount.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  </head>
-  <body>
-  <div id="container">
-  <header>
-  <div class="main-header">
+{% extends 'base.html' %}
+
+{% block title %}Create Your NEBULA Account{% endblock %}
+
+{% block head %}
+  <meta name="description" content="Sign up for NEBULA – a community for junior coders.">
+  <meta name="keywords" content="coding, registration, software development, kids, teens">
+  <meta name="author" content="NEBULA">
+
+  <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+<div id="container">
+  <header class="main-header">
     <div class="logo-container">
       <img src="{{ url_for('static', filename='images/desktop-logo.webp') }}" width="500" height="250" alt="Company Logo" class="desktop-logo">
       <img src="{{ url_for('static', filename='images/mobiletablet-logo.webp') }}" width="375" height="188" alt="Company Logo" class="mobiletablet-logo">
     </div>
-    </div>
   </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
   <main>
-    {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="alert alert-warning" role="alert">
-      {% for message in messages %}
-        <div>{{ message }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
-<div class="login-box">
-  <form id="createAccount" method="POST" action="{{ url_for('register') }}">
-    <h2 class="text-center">Create Your Account</h2>
+    <div class="login-box">
+      <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+        <h2>Create Account</h2>
 
-    <div class="form-group">
-      <label for="fullname" class="form-label">Full Name</label>
-      <div class="input-icon">
-        <i class="bi bi-person"></i>
-        <input type="text" class="form-control" id="fullname" name="full_name" placeholder="Your full name" required>
-      </div>
-    </div>
+        <div class="form-group">
+          <label for="full_name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="full_name" name="full_name" required>
+        </div>
 
-    <div class="form-group">
-      <label for="inputEmail1">Email address</label>
-      <div class="input-icon">
-        <i class="bi bi-envelope"></i>
-        <input type="email" class="form-control" id="inputEmail1" name="email" placeholder="Enter email" required>
-      </div>
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div id="emailError" class="form-text"></div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
 
-    <div class="form-group">
-      <label for="inputPassword1">Password</label>
-      <div class="input-icon">
-        <i class="bi bi-lock"></i>
-        <input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Password" required>
-      </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </form>
+
+      <a href="{{ url_for('login') }}" class="btn btn-secondary mt-3">Back to Login</a>
     </div>
-    <div id="passwordError" class="form-text"></div>
-    <div class="form-group">
-      <label for="inputPassword2">Confirm Password</label>
-      <div class="input-icon">
-        <i class="bi bi-lock"></i>
-        <input type="password" class="form-control" id="inputPassword2" name="confirm_password" placeholder="Confirm Password" required>
-      </div>
-    </div>
-    <div id="confirmPasswordError" class="form-text"></div>
-    <button type="submit" class="btn btn-primary">Create My Account</button>
-    <a href="{{ url_for('login') }}" class="btn btn-secondary d-block mx-auto mt-2">Return to Login page</a>
-  </form>
+  </main>
+
+  <footer>
+    NEBULA &copy; Kiera Reidy 2025<br>
+  </footer>
 </div>
-</main>
-<footer>
-NEBULA &copy; Kiera Reidy 2025<br>
-</footer>
-<script src="{{ url_for('static', filename='javascript/createaccount.js') }}"></script>
-</div>
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='javascript/register.js') }}"></script>
+{% endblock %}

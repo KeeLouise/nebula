@@ -64,7 +64,7 @@ def register_routes(app):
             flash("Account created successfully! Please log in.")
             return redirect(url_for('login'))
 
-        return render_template('createaccount.html')
+        return render_template('createaccount.html', hide_header=True, hide_footer=True)
 
     @app.route('/blog', methods=['GET'])
     def blogpage():
