@@ -132,5 +132,18 @@ def delete_post(post_id):
 # Programming Joke API
 def get_programming_joke():
     url = "https://v2.jokeapi.dev/joke/Programming?safe-mode"
-    res = requests.get(url)
-    return res.json()
+
+    try:
+        res = requests.get(url, timeout=5)
+        res.raise_for_status()
+        data = res.json()
+
+        if data.get("type") == "single":
+            return data.get("joke")
+        elif data.get("type") == "twopart":
+            return f"{data.get('setup')} — {data.get('delivery')}"
+        else:
+            return "We tried to find a joke, but it got lost in the code..."
+
+    except Exception as e:
+        return "Oops! Our joke server is having a bad day. Try again later."
