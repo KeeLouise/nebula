@@ -42,13 +42,14 @@ class User:
         )
 
 class Post:
-    def __init__(self, id, author, content, created_at, likes=0, comments=None):
+    def __init__(self, id, author, content, created_at, likes=0, comments=None, liked_by=None):
         self.id = id
         self.author = author
         self.content = content
         self.created_at = created_at
         self.likes = likes
         self.comments = comments or []
+        self.liked_by = set(liked_by) if liked_by else set()
 
     def to_dict(self):
         return {
@@ -57,7 +58,8 @@ class Post:
             "content": self.content,
             "created_at": self.created_at,
             "likes": self.likes,
-            "comments": self.comments
+            "comments": self.comments,
+            "liked_by": list(self.liked_by)
         }
 
     @classmethod
@@ -68,7 +70,8 @@ class Post:
             content=data.get("content"),
             created_at=data.get("created_at"),
             likes=data.get("likes", 0),
-            comments=data.get("comments", [])
+            comments=data.get("comments", []),
+            liked_by=data.get("liked_by", [])
         )
 
 # USER FUNCTIONS
