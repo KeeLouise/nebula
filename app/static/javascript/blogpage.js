@@ -105,4 +105,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       });
     }
+    
+    // Community Guidelines toggle – KR 16/04/2025
+    const guidelinesToggle = document.getElementById("guidelines-toggle");
+    const guidelinesContent = document.getElementById("guidelines-content");
+    
+    if (guidelinesToggle && guidelinesContent) {
+      guidelinesToggle.addEventListener("click", () => {
+        guidelinesContent.classList.toggle("show");
+      });
+    }
   });
