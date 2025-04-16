@@ -28,6 +28,13 @@ body, html {
   z-index: 100;
 }
 
+.small-flash {
+  font-size: 0.85rem;        /* Smaller text */
+  padding: 0.5rem 1rem;      /* Less padding */
+  max-width: 300px;          /* Prevent it from stretching too far */
+  margin: 1rem auto;         /* Center and space it out */
+}
+
 .desktop-logo {
   display: inline;
 }
