@@ -23,7 +23,7 @@
             <source media="(max-width: 460px)" srcset="{{ url_for('static', filename=product.image_url.replace('desktop', 'mobile')) }}">
             <img
               src="{{ url_for('static', filename=product.image_url) }}"
-              srcset="{{ url_for('static', filename=product.image_url) }} 660w, {{ url_for('static', filename=product.image_url.replace('.webp', '@2x.webp')) }} 1320w"
+              srcset="{{ url_for('static', filename=product.image_url) }} 660w"
               sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
               width="660" height="660"
               alt="{{ product.name }}"
