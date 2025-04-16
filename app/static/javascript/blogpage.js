@@ -39,63 +39,56 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   
-    // Guidelines toggle – KR 26/03/2025
-    const toggle = document.getElementById("guidelines-toggle");
-    const content = document.getElementById("guidelines-content");
+    // Collapsible comments toggle – KR 16/04/2025
+    document.querySelectorAll('.toggle-comments').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const commentsEl = document.getElementById(targetId);
   
-    if (toggle && content) {
-      toggle.addEventListener("click", function () {
-        content.classList.toggle("show");
+        if (commentsEl.style.display === 'none' || commentsEl.style.display === '') {
+          commentsEl.style.display = 'block';
+          button.textContent = 'Hide Comments';
+        } else {
+          commentsEl.style.display = 'none';
+          const count = commentsEl.querySelectorAll('li').length;
+          button.textContent = `Show Comments (${count})`;
+        }
       });
-    }
-  
-    // Post search filter – KR 26/03/2025
-    const searchInput = document.getElementById("post-search");
-    const posts = document.querySelectorAll(".post-scroll .card");
-  
-    if (searchInput && posts.length > 0) {
-      searchInput.addEventListener("input", function () {
-        const query = this.value.toLowerCase();
-        posts.forEach(post => {
-          const text = post.textContent.toLowerCase();
-          post.style.display = text.includes(query) ? "block" : "none";
-        });
-      });
-    }
-  
-    // Like button on posts – KR 16/04/2025
-    document.querySelectorAll('.like-btn').forEach(button => {
-        button.addEventListener('click', () => {
-          const postId = button.getAttribute('data-post-id');
-      
-          fetch(`/toggle_like/${postId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Requested-With': 'XMLHttpRequest'
-            }
-          })
-            .then(res => res.json())
-            .then(data => {
-              if (data.likes !== undefined) {
-                const countSpan = document.getElementById(`like-count-${postId}`);
-                countSpan.textContent = data.likes;
-      
-                const icon = button.querySelector('i');
-      
-                if (button.classList.contains('btn-outline-primary')) {
-                  button.classList.remove('btn-outline-primary');
-                  button.classList.add('btn-primary');
-                  icon.classList.remove('bi-rocket');
-                  icon.classList.add('bi-rocket-fill');
-                } else {
-                  button.classList.remove('btn-primary');
-                  button.classList.add('btn-outline-primary');
-                  icon.classList.remove('bi-rocket-fill');
-                  icon.classList.add('bi-rocket');
-                }
-              }
-            });
-        });
     });
-});
+  
+    // Like button toggle – KR 16/04/2025
+    document.querySelectorAll('.like-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const postId = button.getAttribute('data-post-id');
+  
+        fetch(`/toggle_like/${postId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.likes !== undefined) {
+              const countSpan = document.getElementById(`like-count-${postId}`);
+              countSpan.textContent = data.likes;
+  
+              const icon = button.querySelector('i');
+  
+              if (button.classList.contains('btn-outline-primary')) {
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('btn-primary');
+                icon.classList.remove('bi-rocket');
+                icon.classList.add('bi-rocket-fill');
+              } else {
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-outline-primary');
+                icon.classList.remove('bi-rocket-fill');
+                icon.classList.add('bi-rocket');
+              }
+            }
+          });
+      });
+    });
+  });

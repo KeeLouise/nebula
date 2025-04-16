@@ -74,31 +74,6 @@ def register_routes(app):
         posts = load_posts()
         return render_template('blogpage.html', posts=posts, user=session['user'], time_ago=time_ago)
 
-    @app.route('/post', methods=['POST'])
-    def create_post():
-        if 'user' not in session:
-            flash("You must be logged in to post.")
-            return redirect(url_for('login'))
-
-        content = request.form.get('content')
-        if not content:
-            flash("Post cannot be empty.")
-            return redirect(url_for('blogpage'))
-
-        user = get_user(session['user'])
-        new_post = Post(
-            id=str(uuid.uuid4()),
-            author=user.full_name,
-            content=content,
-            created_at=datetime.now(timezone.utc).isoformat(),
-            likes=0,
-            comments=[],
-            liked_by=set()
-        )
-        save_post(new_post)
-        flash("Your post was published successfully.")
-        return redirect(url_for('blogpage'))
-
     @app.route('/comment/<post_id>', methods=['POST'])
     def add_comment(post_id):
         if 'user' not in session:
@@ -114,11 +89,36 @@ def register_routes(app):
         if post:
             comment = {
                 "author": session.get('name', 'Anonymous'),
-                "text": comment_text
+                "text": comment_text,
+                "timestamp": datetime.now(timezone.utc).isoformat()
             }
             post.comments.append(comment)
             update_post(post_id, post)
             flash("Comment added!")
+
+        return redirect(url_for('blogpage'))
+
+    @app.route('/delete_comment/<post_id>/<int:comment_index>', methods=['POST'])
+    def delete_comment(post_id, comment_index):
+        if 'user' not in session:
+            flash("You must be logged in to delete a comment.")
+            return redirect(url_for('login'))
+
+        post = find_post_by_id(post_id)
+        if not post:
+            flash("Post not found.")
+            return redirect(url_for('blogpage'))
+
+        if 0 <= comment_index < len(post.comments):
+            comment = post.comments[comment_index]
+            if comment['author'] == session.get('name'):
+                post.comments.pop(comment_index)
+                update_post(post_id, post)
+                flash("Comment deleted.")
+            else:
+                flash("You can only delete your own comments.")
+        else:
+            flash("Invalid comment selected.")
 
         return redirect(url_for('blogpage'))
 
@@ -151,15 +151,12 @@ def register_routes(app):
         if not post:
             return jsonify({"error": "Post not found"}), 404
 
-        # Ensure liked_by is initialized
         if not hasattr(post, "liked_by") or post.liked_by is None:
             post.liked_by = set()
 
-        # Convert liked_by to set if loaded as list
         if isinstance(post.liked_by, list):
             post.liked_by = set(post.liked_by)
 
-        # Toggle like
         if user_email in post.liked_by:
             post.liked_by.remove(user_email)
             post.likes = max(post.likes - 1, 0)
@@ -169,6 +166,31 @@ def register_routes(app):
 
         update_post(post_id, post)
         return jsonify({"success": True, "likes": post.likes})
+
+    @app.route('/post', methods=['POST'])
+    def create_post():
+        if 'user' not in session:
+            flash("You must be logged in to post.")
+            return redirect(url_for('login'))
+
+        content = request.form.get('content')
+        if not content:
+            flash("Post cannot be empty.")
+            return redirect(url_for('blogpage'))
+
+        user = get_user(session['user'])
+        new_post = Post(
+            id=str(uuid.uuid4()),
+            author=user.full_name,
+            content=content,
+            created_at=datetime.now(timezone.utc).isoformat(),
+            likes=0,
+            comments=[],
+            liked_by=set()
+        )
+        save_post(new_post)
+        flash("Your post was published successfully.")
+        return redirect(url_for('blogpage'))
 
     @app.route('/merchandise')
     def merchandise():
