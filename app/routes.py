@@ -164,6 +164,10 @@ def register_routes(app):
         joke = get_programming_joke()
         return render_template('resources.html', joke=joke)
     
+    @app.errorhandler(401)
+    def unauthorized(e):
+        return render_template("401.html", show_logo_only=True), 401
+
     @app.errorhandler(403)
     def forbidden(e):
         return render_template("403.html", show_logo_only=True), 403
