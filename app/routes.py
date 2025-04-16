@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, url_for, session, flash
+from app.models import product_list
 from werkzeug.security import generate_password_hash, check_password_hash
-from .helpers import (
+from app.helpers import (
     User, Post,
-    load_users, save_user, get_user, load_posts,
-    save_post, save_posts, find_post_by_id, update_post, delete_post, get_programming_joke
+    save_user, get_user, load_posts,
+    save_post, find_post_by_id, update_post, delete_post, get_programming_joke
 )
 from datetime import datetime, timezone
 import uuid
@@ -151,7 +152,7 @@ def register_routes(app):
 
     @app.route('/merchandise')
     def merchandise():
-        return render_template("merchandise.html")
+        return render_template("merchandise.html", products=product_list, show_cart=True)
 
     @app.route('/logout', methods=['POST'])
     def logout():

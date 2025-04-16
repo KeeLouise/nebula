@@ -88,3 +88,14 @@ class Cart:
 
     def to_dict(self):
         return [item.to_dict() for item in self.items]
+
+product_list = [
+    Product("p1", "NEBULA T-Shirt - White", 25.00, "images/desktop-store-whitetshirt.webp"),
+    Product("p2", "NEBULA T-Shirt - Black", 25.00, "images/desktop-store-blacktshirt.webp"),
+    Product("p3", "NEBULA Sweat - White", 45.00, "images/desktop-store-whitesweatshirt.webp"),
+    Product("p4", "NEBULA Sweat - Black", 45.00, "images/desktop-store-blacksweatshirt.webp"),
+    Product("p5", "NEBULA Baseball Cap", 15.00, "images/desktop-store-blackhat.webp"),
+    Product("p6", "NEBULA Keyring - Black", 5.00, "images/desktop-store-keyring.webp"),
+    Product("p7", "NEBULA Mug - White", 10.00, "images/desktop-store-whitemug.webp"),
+    Product("p8", "NEBULA Mug - Black", 10.00, "images/desktop-store-blackmug.webp"),
+]
