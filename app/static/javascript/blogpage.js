@@ -63,24 +63,39 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ✅ LIKE BUTTON LOGIC – KR 16/04/2025
+    // Like button on posts – KR 16/04/2025
     document.querySelectorAll('.like-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const postId = button.getAttribute('data-post-id');
-  
-        fetch(`/toggle_like/${postId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.likes !== undefined) {
-              document.getElementById(`like-count-${postId}`).textContent = data.likes;
+        button.addEventListener('click', () => {
+          const postId = button.getAttribute('data-post-id');
+      
+          fetch(`/toggle_like/${postId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
             }
-          });
-      });
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.likes !== undefined) {
+                const countSpan = document.getElementById(`like-count-${postId}`);
+                countSpan.textContent = data.likes;
+      
+                const icon = button.querySelector('i');
+      
+                if (button.classList.contains('btn-outline-primary')) {
+                  button.classList.remove('btn-outline-primary');
+                  button.classList.add('btn-primary');
+                  icon.classList.remove('bi-rocket');
+                  icon.classList.add('bi-rocket-fill');
+                } else {
+                  button.classList.remove('btn-primary');
+                  button.classList.add('btn-outline-primary');
+                  icon.classList.remove('bi-rocket-fill');
+                  icon.classList.add('bi-rocket');
+                }
+              }
+            });
+        });
     });
-  });
+});

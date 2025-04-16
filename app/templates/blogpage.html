@@ -42,11 +42,12 @@
           <p>{{ post.content }}</p>
           <div class="d-flex align-items-center gap-2 mb-2">
             <button
-              class="btn btn-sm like-btn {% if user in post.liked_by %}btn-primary{% else %}btn-outline-primary{% endif %}"
-              data-post-id="{{ post.id }}"
-            >
-              <i class="bi {% if user in post.liked_by %}bi-rocket-fill{% else %}bi-rocket{% endif %}"> Like Post</i>
-            </button>
+  class="btn btn-sm like-btn {% if user in post.liked_by %}btn-primary{% else %}btn-outline-primary{% endif %}"
+  data-post-id="{{ post.id }}"
+  data-liked="{% if user in post.liked_by %}true{% else %}false{% endif %}"
+>
+  <i class="bi {% if user in post.liked_by %}bi-rocket-fill{% else %}bi-rocket{% endif %}">Like Post</i>
+</button>
             <span id="like-count-{{ post.id }}">{{ post.likes }}</span> Likes
           </div>
           {% if session.name == post.author %}
