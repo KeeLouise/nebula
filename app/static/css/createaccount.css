@@ -10,14 +10,11 @@ body, html {
   
 }
 
-.alert {
-  position: fixed;
-  top: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 200;
-  width: 90%;
-  max-width: 500px;
+.small-flash {
+  font-size: 0.85rem;      
+  padding: 0.5rem 1rem;      
+  max-width: 300px;          
+  margin: 1rem auto;         
 }
 
 #container {
