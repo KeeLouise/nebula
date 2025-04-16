@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const flash = document.getElementById("flash-message");
+    if (flash) {
+      setTimeout(() => {
+        flash.classList.remove("show");  // Bootstrap class - KR 16/04/2025
+        flash.classList.add("fade");     // Bootstrap class - KR 16/04/2025
+        flash.style.transition = "opacity 0.5s ease-out";
+        flash.style.opacity = 0;
+
+        // remove from DOM after fade – KR 16/04/2025
+        setTimeout(() => flash.remove(), 500);
+      }, 3000); // Flash disappears after 3 seconds – KR 16/04/2025
+    }
+
+
     const hamburger = document.querySelector(".hamburger-menu");
     const mobileNav = document.querySelector("#mobile-nav");
 

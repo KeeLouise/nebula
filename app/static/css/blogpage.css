@@ -154,6 +154,15 @@ p.text-muted {
     text-align: center !important;
 }
 
+.small-flash {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    max-width: 400px;
+    margin: 1rem auto;
+    text-align: center;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+  }
 
 .card {
     border-radius: 10px;

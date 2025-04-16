@@ -12,14 +12,14 @@
 <div class="grid-container">
   <main class="main-content">
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="alert alert-info mt-3">
-          {% for message in messages %}
-            <div>{{ message }}</div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+    {% if messages %}
+      <div class="alert alert-warning alert-dismissible fade show small-flash" role="alert" id="flash-message">
+        {% for message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 
     <h1>What's on your mind?</h1>
     <div class="card p-3 mb-3">
