@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         flash.classList.add("fade");     // Bootstrap class - KR 16/04/2025
         flash.style.transition = "opacity 0.5s ease-out";
         flash.style.opacity = 0;
-        flash.style.scale = 
 
         // remove from DOM after fade – KR 16/04/2025
         setTimeout(() => flash.remove(), 500);
