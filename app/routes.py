@@ -30,7 +30,7 @@ def register_routes(app):
             flash("Invalid email or password. Please try again or register.")
             return redirect(url_for('login'))
 
-        return render_template('login.html')
+        return render_template('login.html', hide_header=True, hide_footer=True)
 
     @app.route('/register', methods=['GET', 'POST'])
     def register():
