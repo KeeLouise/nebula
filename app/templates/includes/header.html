@@ -1,0 +1,38 @@
+<header>
+  <div class="logo-container">
+    <img src="{{ url_for('static', filename='images/desktop-logo.webp') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
+    <img src="{{ url_for('static', filename='images/mobiletablet-logo.webp') }}" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
+  </div>
+
+  <div class="hamburger-menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <div id="mobile-nav">
+    <ul>
+      <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+      <li><a href="{{ url_for('resources') }}">Resources</a></li>
+      <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
+      <li>
+        <form action="/logout" method="POST">
+          <button type="submit" class="logout-button">Logout</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('blogpage') }}">Home</a></li>
+      <li><a href="{{ url_for('resources') }}">Resources</a></li>
+      <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
+      <li>
+        <form action="/logout" method="POST">
+          <button type="submit" class="logout-button">Logout <i class="bi bi-box-arrow-right"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</header>

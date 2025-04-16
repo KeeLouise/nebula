@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}NEBULA - Junior Coding Community{% endblock %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block head %}{% endblock %}
+  <title>{% block title %}NEBULA - Junior Coding Community{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head %}{% endblock %}
 </head>
 <body>
-<div class="page-wrapper">
+  <div class="page-wrapper">
     {% include 'includes/header.html' %}
     {% block content %}{% endblock %}
     {% include 'includes/footer.html' %}
-</div>
-{% block scripts %}{% endblock %}
+  </div>
+  {% block scripts %}{% endblock %}
 </body>
 </html>
 
