@@ -91,4 +91,18 @@ document.addEventListener("DOMContentLoaded", function () {
           });
       });
     });
+
+    // Post search filter – KR 16/04/2025
+    const searchInput = document.getElementById("post-search");
+    const posts = document.querySelectorAll(".post-scroll .card");
+
+    if (searchInput && posts.length > 0) {
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        posts.forEach(post => {
+          const text = post.textContent.toLowerCase();
+          post.style.display = text.includes(query) ? "block" : "none";
+        });
+      });
+    }
   });
