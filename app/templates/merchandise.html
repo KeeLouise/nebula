@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>NEBULA - Junior Coding Community</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore NEBULA's exclusive junior coding community merchandise, including t-shirts, sweatshirts, mugs, caps, and more. Shop your favorite gear now!">
+{% extends 'base.html' %}
+
+{% block title %}NEBULA - Junior Coding Community{% endblock %}
+
+{% block head %}
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,207 +10,37 @@
   <link href="{{ url_for('static', filename='css/merchandise.css') }}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
-</head>
-<body>
-  <div class="page-wrapper">
-    <header>
-      <div class="logo-container">
-        <img src="{{ url_for('static', filename='images/desktop-logo.webp') }}" width="500" height="250" alt="NEBULA Company Logo" class="desktop-logo">
-        <img src="{{ url_for('static', filename='images/mobiletablet-logo.webp') }}" width="375" height="188" alt="NEBULA Company Logo" class="mobiletablet-logo">
-      </div>
-      <div class="cart-container">
-        <button id="cart-toggle">🛒 My Cart (<span id="cart-count">0</span>)</button>
-        <div id="cart-dropdown" class="hidden">
-          <ul id="cart-items"></ul>
-          <p>Total: €<span id="cart-total">0.00</span></p>
-          <button id="checkout-btn">Checkout</button>
-        </div>
-      </div>
-      <div class="hamburger-menu">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-      <div id="mobile-nav">
-        <ul>
-          <li><a href="{{ url_for('blogpage') }}">Home</a></li>
-          <li><a href="{{ url_for('resources') }}">Resources</a></li>
-          <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-          <li>
-            <form id="logoutForm" action="/logout" method="POST">
-              <button id="logout" type="submit" class="logout-button">Logout</button>
-            </form>
-          </li>
-        </ul>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="{{ url_for('blogpage') }}">Home</a></li>
-          <li><a href="{{ url_for('resources') }}">Resources</a></li>
-          <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
-          <li>
-            <form id="logoutForm1" action="/logout" method="POST">
-              <button id="logout1" type="submit" class="logout-button">Logout <i class="bi bi-box-arrow-right"></i></button>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </header>
-   <div class="grid-container">
-    <main>
-      <div class="product-grid">
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitetshirt.webp">
-            <img
-              src="/static/images/desktop-store-whitetshirt.webp"
-              srcset="/static/images/desktop-store-whitetshirt.webp 660w, /static/images/desktop-store-whitetshirt@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA T-Shirt - White"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA T-Shirt - White</h2>
-          <p class="product-price">€25.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blacktshirt.webp">
-            <img
-              src="/static/images/desktop-store-blacktshirt.webp"
-              srcset="/static/images/desktop-store-blacktshirt.webp 660w, /static/images/desktop-store-blacktshirt@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA T-Shirt - Black"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA T-Shirt - Black</h2>
-          <p class="product-price">€25.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitesweatshirt.webp">
-            <img
-              src="/static/images/desktop-store-whitesweatshirt.webp"
-              srcset="/static/images/desktop-store-whitesweatshirt.webp 660w, /static/images/desktop-store-whitesweatshirt@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Sweat - White"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Sweat - White</h2>
-          <p class="product-price">€45.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blacksweatshirt.webp">
-            <img
-              src="/static/images/desktop-store-blacksweatshirt.webp"
-              srcset="/static/images/desktop-store-blacksweatshirt.webp 660w, /static/images/desktop-store-blacksweatshirt@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Sweat - Black"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Sweat - Black</h2>
-          <p class="product-price">€45.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blackhat.webp">
-            <img
-              src="/static/images/desktop-store-blackhat.webp"
-              srcset="/static/images/desktop-store-blackhat.webp 660w, /static/images/desktop-store-blackhat@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Baseball Cap"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Baseball Cap</h2>
-          <p class="product-price">€15.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-keyring.webp">
-            <img
-              src="/static/images/desktop-store-keyring.webp"
-              srcset="/static/images/desktop-store-keyring.webp 660w, /static/images/desktop-store-keyring@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Keyring"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Keyring - Black</h2>
-          <p class="product-price">€5.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-whitemug.webp">
-            <img
-              src="/static/images/desktop-store-whitemug.webp"
-              srcset="/static/images/desktop-store-whitemug.webp 660w, /static/images/desktop-store-whitemug@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Mug - White"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Mug - White</h2>
-          <p class="product-price">€10.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-top">
-          <picture>
-            <source media="(max-width: 460px)" srcset="/static/images/mobile-store-blackmug.webp">
-            <img
-              src="/static/images/desktop-store-blackmug.webp"
-              srcset="/static/images/desktop-store-blackmug.webp 660w, /static/images/desktop-store-blackmug@2x.webp 1320w"
-              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
-              width="660" height="660"
-              alt="NEBULA Mug - Black"
-              class="product-image"
-            >
-          </picture>
-          <h2 class="product-title">NEBULA Mug - Black</h2>
-          <p class="product-price">€10.00</p>
-          </div>
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-      </div>
-    </main>
-      </div>
+{% endblock %}
 
-    <footer>
-      NEBULA &copy; Kiera Reidy 2025
-    </footer>
-  </div>
+{% block content %}
+<div class="grid-container">
+  <main>
+    <div class="product-grid">
+      {% for product in products %}
+      <div class="product">
+        <div class="product-top">
+          <picture>
+            <source media="(max-width: 460px)" srcset="{{ url_for('static', filename=product.image_url.replace('desktop', 'mobile')) }}">
+            <img
+              src="{{ url_for('static', filename=product.image_url) }}"
+              srcset="{{ url_for('static', filename=product.image_url) }} 660w, {{ url_for('static', filename=product.image_url.replace('.webp', '@2x.webp')) }} 1320w"
+              sizes="(max-width: 460px) 100vw, (max-width: 1024px) 50vw, 250px"
+              width="660" height="660"
+              alt="{{ product.name }}"
+              class="product-image"
+            >
+          </picture>
+          <h2 class="product-title">{{ product.name }}</h2>
+          <p class="product-price">€{{ product.price }}</p>
+        </div>
+        <button type="button" class="add-to-cart-btn">Add to Cart</button>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
   <script src="{{ url_for('static', filename='javascript/merchandise.js') }}"></script>
-</body>
-</html>
+{% endblock %}
