@@ -1,0 +1,99 @@
+.desktop-logo {
+    display: block;
+}
+
+.mobiletablet-logo {
+    display: none;
+}
+
+.logo-only-header {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.error-page {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: white;
+  background-color: black;
+}
+
+.error-page h1 {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+
+.error-page p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+footer {
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    padding-top: 100px;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 460px) {
+    .desktop-logo {
+      display: none;
+    }
+  
+    .mobiletablet-logo {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        text-align: center;
+      }
+    
+      .logo-container {
+        text-align: center;
+        padding: 1rem 0;
+      }
+  
+    .error-page h1 {
+      font-size: 3rem;
+    }
+  
+    .error-page p {
+      font-size: 3rem;
+      padding: 0 1rem;
+    }
+  
+    .error-page {
+      padding: 2rem 1rem;
+    }
+  
+    .btn {
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+    }
+  
+    footer {
+      font-size: 0.9rem;
+      padding-top: 50px;
+    }
+  }
+
+  @media (max-width: 830px) {
+    .desktop-logo {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        text-align: center;
+      }
+
+      .error-page p {
+        font-size: 3rem;
+        padding: 0 1rem;
+      }
+    }

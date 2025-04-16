@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block title %}NEBULA - Junior Coding Community{% endblock %}</title>
+  <title>{% block title %}NEBULA{% endblock %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% block head %}{% endblock %}
 </head>
 <body>
   <div class="page-wrapper">
-    {% if not hide_header %}
-      {% include 'includes/header.html' %}
-    {% endif %}
+    {% if show_logo_only %}
+  {% include 'includes/logo_header.html' %}
+{% elif not hide_header %}
+  {% include 'includes/header.html' %}
+{% endif %}
 
     {% block content %}{% endblock %}
 
     {% if not hide_footer %}
-    {% include 'includes/footer.html' %}
-  {% endif %}
+      {% include 'includes/footer.html' %}
+    {% endif %}
   </div>
 
   {% block scripts %}{% endblock %}
