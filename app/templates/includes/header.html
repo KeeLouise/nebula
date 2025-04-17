@@ -30,7 +30,7 @@
       <li><a href="{{ url_for('resources') }}">Resources</a></li>
       <li><a href="{{ url_for('merchandise') }}">Merchandise</a></li>
       <li>
-        <form action="/logout" method="POST">
+        <form action="{{ url_for('logout') }}" method="POST">
           <button type="submit" class="logout-button">Logout</button>
         </form>
       </li>
