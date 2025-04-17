@@ -1,4 +1,4 @@
-from app.forms import RegisterForm
+from app.forms import RegisterForm, LoginForm, PostForm, CommentForm
 from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from app.models import product_list
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -17,9 +17,10 @@ def register_routes(app):
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
-        if request.method == 'POST':
-            email = request.form.get('email').lower().strip()
-            password = request.form.get('password')
+        form = LoginForm()
+        if form.validate_on_submit():
+            email = form.email.data.lower().strip()
+            password = form.password.data
 
             user = get_user(email)
             if user and check_password_hash(user.password, password):
@@ -30,7 +31,7 @@ def register_routes(app):
             flash("Invalid email or password. Please try again or register.")
             return redirect(url_for('login'))
 
-        return render_template('login.html', hide_header=True, hide_footer=True)
+        return render_template('login.html', form=form, hide_header=True, hide_footer=True)
 
     @app.route('/register', methods=['GET', 'POST'])
     def register():
@@ -66,22 +67,20 @@ def register_routes(app):
             flash("You must be logged in to comment.")
             return redirect(url_for('login'))
 
-        comment_text = request.form.get('comment')
-        if not comment_text:
+        form = CommentForm()
+        if form.validate_on_submit():
+            post = find_post_by_id(post_id)
+            if post:
+                comment = {
+                    "author": session.get('name', 'Anonymous'),
+                    "text": form.comment.data,
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                post.comments.append(comment)
+                update_post(post_id, post)
+                flash("Comment added!")
+        else:
             flash("Comment cannot be empty.")
-            return redirect(url_for('blogpage'))
-
-        post = find_post_by_id(post_id)
-        if post:
-            comment = {
-                "author": session.get('name', 'Anonymous'),
-                "text": comment_text,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            post.comments.append(comment)
-            update_post(post_id, post)
-            flash("Comment added!")
-
         return redirect(url_for('blogpage'))
 
     @app.route('/delete_comment/<post_id>/<int:comment_index>', methods=['POST'])
@@ -159,23 +158,22 @@ def register_routes(app):
             flash("You must be logged in to post.")
             return redirect(url_for('login'))
 
-        content = request.form.get('content')
-        if not content:
+        form = PostForm()
+        if form.validate_on_submit():
+            user = get_user(session['user'])
+            new_post = Post(
+                id=str(uuid.uuid4()),
+                author=user.full_name,
+                content=form.content.data,
+                created_at=datetime.now(timezone.utc).isoformat(),
+                likes=0,
+                comments=[],
+                liked_by=set()
+            )
+            save_post(new_post)
+            flash("Your post was published successfully.")
+        else:
             flash("Post cannot be empty.")
-            return redirect(url_for('blogpage'))
-
-        user = get_user(session['user'])
-        new_post = Post(
-            id=str(uuid.uuid4()),
-            author=user.full_name,
-            content=content,
-            created_at=datetime.now(timezone.utc).isoformat(),
-            likes=0,
-            comments=[],
-            liked_by=set()
-        )
-        save_post(new_post)
-        flash("Your post was published successfully.")
         return redirect(url_for('blogpage'))
 
     @app.route('/merchandise')
