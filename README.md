@@ -11,9 +11,17 @@
 
 ## Website Goal
 
-    This web app is aimed at beginner and junior coders who are eager to grow their skills and connect with others. After logging in, users can explore blog posts, browse a curated list of useful coding resources, and check out the merchandise page. It’s fully responsive across desktop, tablet, and mobile devices.
+    This web app is aimed at beginner and junior coders who are eager to grow their skills 
+    and connect with others. After logging in, users can explore blog posts, 
+    browse a curated list of useful coding resources, 
+    and check out the merchandise page. It’s fully responsive across desktop, 
+    tablet, and mobile devices.
 
-    The goal is to create a welcoming space where junior developers can share ideas, support each other, and grow together in their coding journey — while also making the most of Python throughout the development process. The app is built using Flask, with Flask-WTF for form handling and validation, and shelve (via a custom DumbShelf wrapper) for lightweight data persistence.
+    The goal is to create a welcoming space where junior developers can share ideas, support each other, 
+    and grow together in their coding journey — while also making the most of Python 
+    throughout the development process. The app is built using Flask, 
+    with Flask-WTF for form handling and validation, and shelve (via a custom DumbShelf wrapper) for lightweight data 
+    persistence.
  
 
 ## List of sources
