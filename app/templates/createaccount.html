@@ -33,30 +33,43 @@
 
   <main>
     <div class="login-box">
-      <form id="createAccount" method="POST" action="{{ url_for('register') }}">
+      <form method="POST">
+        {{ form.hidden_tag() }}
         <h2>Create Account</h2>
-
+ 
         <div class="form-group">
-          <label for="full_name" class="form-label">Full Name</label>
-          <input type="text" class="form-control" id="full_name" name="full_name" required>
+          {{ form.full_name.label(class="form-label") }}
+          {{ form.full_name(class="form-control") }}
+          {% for error in form.full_name.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
         </div>
-
+ 
         <div class="form-group">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-control") }}
+          {% for error in form.email.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
         </div>
-
+ 
         <div class="form-group">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" required>
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control") }}
+          {% for error in form.password.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
         </div>
-
+ 
         <div class="form-group">
-          <label for="confirm_password" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+          {{ form.confirm_password.label(class="form-label") }}
+          {{ form.confirm_password(class="form-control") }}
+          {% for error in form.confirm_password.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
         </div>
-
-        <button type="submit" class="btn btn-primary">Create Account</button>
+ 
+        {{ form.submit(class="btn btn-primary") }}
       </form>
 
       <a href="{{ url_for('login') }}" class="btn btn-secondary mt-3">Back to Login</a>
