@@ -11,3 +11,16 @@ class RegisterForm(FlaskForm):
         EqualTo('password', message='Passwords must match.')
     ])
     submit = SubmitField('Register')
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Log In')
+
+class PostForm(FlaskForm):
+    content = StringField('Content', validators=[DataRequired(), Length(min=1, max=1000)])
+    submit = SubmitField('Post')
+
+class CommentForm(FlaskForm):
+    comment = StringField('Comment', validators=[DataRequired(), Length(min=1, max=500)])
+    submit = SubmitField('Post Comment')
