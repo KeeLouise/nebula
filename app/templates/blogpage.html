@@ -25,8 +25,12 @@
     <div class="card p-3 mb-4 shadow-sm rounded-4">
       <h2>Create a New Post</h2>
       <form method="POST" action="{{ url_for('create_post') }}">
-        <textarea name="content" class="form-control" rows="3" placeholder="Type your post here..." required></textarea>
-        <button type="submit" class="btn btn-primary mt-2">Post</button>
+        {{ post_form.hidden_tag() }}
+        {{ post_form.content(class="form-control", rows=3, placeholder="Type your post here...") }}
+        {% for error in post_form.content.errors %}
+          <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        {{ post_form.submit(class="btn btn-primary mt-2") }}
       </form>
     </div>
 
@@ -67,8 +71,12 @@
             {% endif %}
           </div>
           <form id="comment-form-{{ post.id }}" method="POST" action="{{ url_for('add_comment', post_id=post.id) }}" style="display: none;" class="mt-2">
-            <textarea name="comment" class="form-control mb-2" rows="2" placeholder="Write a comment..." required></textarea>
-            <button type="submit" class="btn btn-sm btn-primary">Post Comment</button>
+            {{ comment_form.hidden_tag() }}
+            {{ comment_form.comment(class="form-control mb-2", rows=2, placeholder="Write a comment...") }}
+            {% for error in comment_form.comment.errors %}
+              <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+            {{ comment_form.submit(class="btn btn-sm btn-primary") }}
           </form>
           {% if post.comments %}
   <button type="button" class="btn btn-sm btn-link p-0 toggle-comments text-primary mt-2" data-target="comments-{{ post.id }}">
