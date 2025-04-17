@@ -101,7 +101,7 @@ footer {
     }
   }
 
-  @media (max-width: 830px) {
+  @media (max-width: 930px) {
     .desktop-logo {
         display: block;
         margin: 0 auto;

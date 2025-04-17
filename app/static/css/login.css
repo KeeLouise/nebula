@@ -142,7 +142,7 @@ footer {
   }
 }
 
-@media (min-width: 600px) and (max-width: 1179px) {
+@media (max-width: 930px) {
 
   .desktop-logo {
     display: none;
