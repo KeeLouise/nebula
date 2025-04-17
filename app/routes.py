@@ -59,7 +59,7 @@ def register_routes(app):
             return redirect(url_for('login'))
 
         posts = load_posts()
-        return render_template('blogpage.html', posts=posts, user=session['user'], time_ago=time_ago)
+        return render_template('blogpage.html', posts=posts, user=session['user'], time_ago=time_ago, post_form=PostForm(), comment_form=CommentForm())
 
     @app.route('/comment/<post_id>', methods=['POST'])
     def add_comment(post_id):
@@ -182,7 +182,7 @@ def register_routes(app):
 
     @app.route('/logout', methods=['POST'])
     def logout():
-        session.pop('user', None)
+        session.clear()
         return redirect(url_for('login'))
 
     @app.route('/resources')
