@@ -34,37 +34,22 @@ def register_routes(app):
 
     @app.route('/register', methods=['GET', 'POST'])
     def register():
-        if request.method == 'POST':
-            full_name = request.form.get('full_name')
-            email = request.form.get('email').lower().strip()
-            password = request.form.get('password')
-            confirm_password = request.form.get('confirm_password')
-
-            # Validation checks
-            if not all([full_name, email, password, confirm_password]):
-                flash("All fields are required.")
-                return redirect(url_for('register'))
-
-            if password != confirm_password:
-                flash("Passwords do not match.")
-                return redirect(url_for('register'))
-
-            if len(password) < 8:
-                flash("Password must be at least 8 characters.")
-                return redirect(url_for('register'))
+        form = RegisterForm()
+        if form.validate_on_submit():
+            email = form.email.data.lower().strip()
 
             if get_user(email):
                 flash("Email already registered.")
                 return redirect(url_for('register'))
 
-            hashed_password = generate_password_hash(password)
-            new_user = User(full_name, email, hashed_password)
+            hashed_password = generate_password_hash(form.password.data)
+            new_user = User(form.full_name.data, email, hashed_password)
             save_user(new_user)
 
             flash("Account created successfully! Please log in.")
             return redirect(url_for('login'))
 
-        return render_template('createaccount.html', hide_header=True, hide_footer=True)
+        return render_template('createaccount.html', form=form, hide_header=True, hide_footer=True)
 
     @app.route('/blog', methods=['GET'])
     def blogpage():
