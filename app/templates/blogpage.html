@@ -44,7 +44,7 @@
     <div class="post-scroll">
       {% if posts %}
         {% for post in posts %}
-        <div class="card p-3 mb-4 shadow-sm rounded-4">
+        <div class="card post-card p-4 mb-4">
           <p class="mb-1 fw-semibold text-primary">{{ post.author }}</p>
           <small class="text-muted">{{ time_ago(post.created_at) }}</small>
           <p class="fs-5">{{ post.content }}</p>
@@ -59,7 +59,7 @@
               </button>
               <span id="like-count-{{ post.id }}" class="small">{{ post.likes }}</span>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary toggle-comment" data-target="comment-form-{{ post.id }}">
+            <button type="button" class="btn btn-sm btn-outline-primary toggle-comment" data-target="comment-form-{{ post.id }}">
               <i class="bi bi-chat-dots"></i> Comment
             </button>
             {% if session.name == post.author %}
