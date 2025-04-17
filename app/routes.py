@@ -17,7 +17,7 @@ def register_routes(app):
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
-            email = request.form.get('email')
+            email = request.form.get('email').lower().strip()
             password = request.form.get('password')
 
             user = get_user(email)
@@ -35,7 +35,7 @@ def register_routes(app):
     def register():
         if request.method == 'POST':
             full_name = request.form.get('full_name')
-            email = request.form.get('email')
+            email = request.form.get('email').lower().strip()
             password = request.form.get('password')
             confirm_password = request.form.get('confirm_password')
 
